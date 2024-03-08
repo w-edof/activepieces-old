@@ -24,11 +24,11 @@ export const newRegistrationFolderCreated = createTrigger({
 
     const response =  await httpClient.sendRequest({
         method: HttpMethod.POST,
-        url: wedofCommon.fakeMeUrl,
+        url: wedofCommon.fakeBaseUrl,
         body: message,
         headers:{
           'Content-Type': 'application/json',
-          'X-Api-Key': context.auth.apiKey as string,
+          'X-Api-Key': context.auth as string,
           'Host': wedofCommon.host,
           'Content-Length': '115',
         },

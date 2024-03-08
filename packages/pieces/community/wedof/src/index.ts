@@ -8,34 +8,7 @@ import { newRegistrationFolderCreated } from './lib/triggers/new-registration-fo
 import { httpClient, HttpMethod } from '@activepieces/pieces-common';
 import { wedofCommon } from './lib/common/wedof';
 
-/*
-export const wedofAuth = PieceAuth.SecretText({
-  displayName: 'API Key',
-  required: true,
-  description: 'Please enter your API Key gived by wedof',
-  validate: async ({ auth }) => {
-    const response = await httpClient.sendRequest({
-      method: HttpMethod.GET,
-      url: wedofCommon.fakeBaseUrl,
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': auth as string,
-        Host: wedofCommon.host,
-      },
-    });
-    if (response.status == 200) {
-      return {
-        valid: true,
-      };
-    } else {
-      return {
-        valid: false,
-        error: 'Invalid Api Key',
-      };
-    }
-  },
-});
-*/
+
  export const wedofAuth = PieceAuth.CustomAuth({
   required: true,
   props: {
@@ -73,6 +46,24 @@ export const wedofAuth = PieceAuth.SecretText({
         error: 'Invalid Api Key',
       };
     }
+  // need validation for the api key ??
+/*  props:{
+    apiKey: Property.ShortText({
+      displayName: 'Api Key',
+      description: 'Please enter your API Key gived by wedof',
+      required: true,
+    }),
+  },*/
+  validate: async ({ auth }) => {
+    if (auth) {
+      return {
+        valid: true,
+      };
+    }
+    return {
+      valid: false,
+      error: 'Invalid Api Key',
+    };
   },
 });
 
