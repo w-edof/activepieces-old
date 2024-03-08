@@ -1,11 +1,51 @@
-import { createPiece, PieceAuth, Property } from '@activepieces/pieces-framework';
+import {
+  createPiece,
+  PieceAuth,
+  Property,
+} from '@activepieces/pieces-framework';
 import { PieceCategory } from '@activepieces/shared';
 import { newRegistrationFolderCreated } from './lib/triggers/new-registration-folder-created';
+import { httpClient, HttpMethod } from '@activepieces/pieces-common';
+import { wedofCommon } from './lib/common/wedof';
 
-export const wedofAuth = PieceAuth.SecretText({
-  displayName: 'API Key',
+
+ export const wedofAuth = PieceAuth.CustomAuth({
   required: true,
-  description: 'Please enter your API Key gived by wedof',
+  props: {
+    id: Property.ShortText({
+      displayName: 'API Key',
+      required: false,
+      description: 'Please enter your API Key gived by wedof',
+      defaultValue: 'rrrrr'
+    }),
+    apiKey: Property.ShortText({
+      displayName: 'API Key',
+      required: true,
+      description: 'Please enter your API Key gived by wedof',
+    }),
+  },
+  validate: async ({ auth }) => {
+   /* const response = await httpClient.sendRequest({
+      method: HttpMethod.GET,
+      url: wedofCommon.fakeBaseUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Api-Key': auth.apiKey,
+        Host: wedofCommon.host,
+      },
+    });*/
+    if (auth.apiKey==="test") {
+       auth.id = "test";
+      return {
+        valid: true,
+      }; 
+    } else {
+      auth.id = "noooo";
+      return {
+        valid: false,
+        error: 'Invalid Api Key',
+      };
+    }
   // need validation for the api key ??
 /*  props:{
     apiKey: Property.ShortText({
@@ -38,7 +78,6 @@ export const wedof = createPiece({
     PieceCategory.PRODUCTIVITY,
   ],
   authors: ['Wedof'],
-  actions: [
-  ],
+  actions: [],
   triggers: [newRegistrationFolderCreated],
 });
