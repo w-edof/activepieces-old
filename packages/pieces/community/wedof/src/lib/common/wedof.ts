@@ -1,3 +1,4 @@
+
 import { Property } from '@activepieces/pieces-framework';
 export const wedofCommon = {
   baseUrl: 'https://staging.wedof.fr/api',
@@ -42,4 +43,5 @@ export const wedofCommon = {
       disabled: false,
     },
   }),
+
 };

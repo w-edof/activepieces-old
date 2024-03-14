@@ -1,6 +1,7 @@
 import {
   createPiece,
   PieceAuth,
+  Property,
 } from '@activepieces/pieces-framework';
 import { PieceCategory } from '@activepieces/shared';
 import {
