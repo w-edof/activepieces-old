@@ -9,6 +9,7 @@ node_modules/
 venv/
 include/
 lib/
+packages/server/api/.env
 yarn.lock
 package-lock.json
 # https://www.pulumi.com/blog/iac-recommended-practices-developer-stacks-git-branches/#using-developer-stacks

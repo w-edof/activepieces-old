@@ -4,66 +4,43 @@ import {
   Property,
 } from '@activepieces/pieces-framework';
 import { PieceCategory } from '@activepieces/shared';
-import { newRegistrationFolderCreated } from './lib/triggers/new-registration-folder-created';
-import { httpClient, HttpMethod } from '@activepieces/pieces-common';
+import {
+  httpClient,
+  HttpMethod,
+} from '@activepieces/pieces-common';
 import { wedofCommon } from './lib/common/wedof';
+import { newRegistrationFolderCreated } from './lib/triggers/new-registration-folder-created';
+import { registrationFolderUpdated } from './lib/triggers/registration-folder-updated';
+import { registrationFolderAccepted } from './lib/triggers/registration-folder-accepted';
+import { registrationFolderPaid } from './lib/triggers/registration-folder-paid';
+import { registrationFolderSelected } from './lib/triggers/registration-folder-selected';
+import { registrationFolderTobill } from './lib/triggers/registration-folder-tobill';
+import { validateRegistrationFolder } from './lib/actions/validate-registration-folder';
 
-
- export const wedofAuth = PieceAuth.CustomAuth({
+export const wedofAuth = PieceAuth.SecretText({
+  displayName: 'API Key',
   required: true,
-  props: {
-    id: Property.ShortText({
-      displayName: 'API Key',
-      required: false,
-      description: 'Please enter your API Key gived by wedof',
-      defaultValue: 'rrrrr'
-    }),
-    apiKey: Property.ShortText({
-      displayName: 'API Key',
-      required: true,
-      description: 'Please enter your API Key gived by wedof',
-    }),
-  },
+  description: 'Please enter your API Key gived by wedof',
   validate: async ({ auth }) => {
-   /* const response = await httpClient.sendRequest({
+    const response = await httpClient.sendRequest({
       method: HttpMethod.GET,
-      url: wedofCommon.fakeBaseUrl,
+      url: wedofCommon.baseUrl + '/users/me',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': auth.apiKey,
-        Host: wedofCommon.host,
+        'X-Api-Key': auth,
       },
-    });*/
-    if (auth.apiKey==="test") {
-       auth.id = "test";
+    });
+
+    if (response.status === 200) {
       return {
         valid: true,
-      }; 
+      };
     } else {
-      auth.id = "noooo";
       return {
         valid: false,
-        error: 'Invalid Api Key',
+        error: 'Invalid Api Key'
       };
     }
-  // need validation for the api key ??
-/*  props:{
-    apiKey: Property.ShortText({
-      displayName: 'Api Key',
-      description: 'Please enter your API Key gived by wedof',
-      required: true,
-    }),
-  },*/
-  validate: async ({ auth }) => {
-    if (auth) {
-      return {
-        valid: true,
-      };
-    }
-    return {
-      valid: false,
-      error: 'Invalid Api Key',
-    };
   },
 });
 
@@ -78,6 +55,11 @@ export const wedof = createPiece({
     PieceCategory.PRODUCTIVITY,
   ],
   authors: ['Wedof'],
-  actions: [],
-  triggers: [newRegistrationFolderCreated],
+  actions: [validateRegistrationFolder],
+  triggers: [newRegistrationFolderCreated,
+    registrationFolderUpdated,
+    registrationFolderAccepted,
+    registrationFolderPaid,
+    registrationFolderSelected,
+    registrationFolderTobill],
 });

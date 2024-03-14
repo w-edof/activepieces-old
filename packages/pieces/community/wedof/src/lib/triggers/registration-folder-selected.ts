@@ -1,36 +1,29 @@
 import { wedofAuth } from '../..';
 import {
   createTrigger,
-  Property,
   TriggerStrategy,
 } from '@activepieces/pieces-framework';
 import { httpClient, HttpMethod } from '@activepieces/pieces-common';
 import { wedofCommon } from '../common/wedof';
 
-const markdown = `
-In the webhook settings, paste this URL: 
-  \`{{webhookUrl}}\`
-`;
-
-export const newRegistrationFolderCreated = createTrigger({
+export const registrationFolderSelected = createTrigger({
   auth: wedofAuth,
-  name: 'newRegistrationFolderCreated',
-  displayName: 'Nouveau dossier',
-  description: 'triggers when a new registration folder is created',
-  type: TriggerStrategy.WEBHOOK,
+  name: 'registrationFolderSelected',
+  displayName: "Dossier à l'état choisi",
+  description: 'triggers when a registration folder is selected',
   props: {
-    about: Property.MarkDown({
-      value: markdown,
-    }),
+    scope: wedofCommon.scope,
   },
   sampleData: {},
-
+  type: TriggerStrategy.WEBHOOK,
   async onEnable(context) {
-    const name ='Activepieces - newRegistrationFolderCreated - ' +context.webhookUrl.substring(context.webhookUrl.lastIndexOf('/') + 1);
+    const name =
+      'Activepieces - RegistrationFolderSelected - ' +
+      context.webhookUrl.substring(context.webhookUrl.lastIndexOf('/') + 1);
 
     const message = {
       url: context.webhookUrl,
-      events: ['registrationFolder.created'],
+      events: context.propsValue.scope,
       name: name,
       secret: null,
       enabled: true,
@@ -58,7 +51,6 @@ export const newRegistrationFolderCreated = createTrigger({
   },
 
   async onDisable(context) {
-  
     const id = await context.store.get('_webhookId');
 
     console.log('/////////// on supprime id ////' + id);
@@ -70,8 +62,7 @@ export const newRegistrationFolderCreated = createTrigger({
         'X-Api-Key': context.auth as string,
       },
     });
-      await context.store.delete('_webhookId');
-  
+    await context.store.delete('_webhookId');
   },
   async run(context) {
     return [context.payload.body];
