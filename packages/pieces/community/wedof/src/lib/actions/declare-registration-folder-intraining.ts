@@ -6,33 +6,26 @@ import {
 } from '@activepieces/pieces-framework';
 import { wedofCommon } from '../common/wedof';
 
-export const validateRegistrationFolder = createAction({
+export const declareRegistrationFolderIntraining = createAction({
   auth: wedofAuth,
-  name: 'validateRegistrationFolder',
-  displayName: "Valider le dossier de l'apprenant ",
-  description: 'Change l\'etat du dossier de formation a l\'etat validé',
+  name: 'declareRegistrationFolderIntraining',
+  displayName: 'Déclarer l\'entrée en formation du participant',
+  description: 'Passe le dossier dans l\'état en formation',
   props: {
-
     externalId: Property.ShortText({
       displayName: 'Id externe',
       description: 'Selectionner la propieté {externalId} du dossier de formation',
       required: true,
     }),
-    indicativeDuration: Property.ShortText({
-      displayName: 'Durée totale de la formation',
-      description: 'Obligatoire dans le cas d\'un dossier avec financement Pôle Emploi ',
-      required: false,
-    }),
-    weeklyDuration: Property.ShortText({
-      displayName: 'Intensité hebdomadaire',
-      description: 'Intensité hebdomadaire de la formation, en heures par semaine.',
+    date: Property.ShortText({
+      displayName: 'Date',
+      description: 'Date du passage en formation au format YYYY-MM-DD.',
       required: false,
     }),
   },
   async run(context) {
     const message = {
-      indicativeDuration: context.propsValue.indicativeDuration,
-      weeklyDuration: context.propsValue.weeklyDuration
+      date: context.propsValue.date,
     };
 
     return await httpClient.sendRequest({
@@ -41,7 +34,7 @@ export const validateRegistrationFolder = createAction({
         wedofCommon.baseUrl +
         '/registrationFolders/' +
         context.propsValue.externalId +
-        '/validate',
+        '/inTraining',
       body: message,
       headers: {
         'Content-Type': 'application/json',

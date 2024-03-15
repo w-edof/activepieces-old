@@ -6,33 +6,32 @@ import {
 } from '@activepieces/pieces-framework';
 import { wedofCommon } from '../common/wedof';
 
-export const validateRegistrationFolder = createAction({
+export const billRegistrationFolder = createAction({
   auth: wedofAuth,
-  name: 'validateRegistrationFolder',
-  displayName: "Valider le dossier de l'apprenant ",
-  description: 'Change l\'etat du dossier de formation a l\'etat validé',
+  name: 'billRegistrationFolder',
+  displayName: 'Facturer le dossier de l\'apprenant',
+  description: 'Genere la facturation d\'un dossier de formation',
   props: {
-
     externalId: Property.ShortText({
       displayName: 'Id externe',
       description: 'Selectionner la propieté {externalId} du dossier de formation',
       required: true,
     }),
-    indicativeDuration: Property.ShortText({
-      displayName: 'Durée totale de la formation',
-      description: 'Obligatoire dans le cas d\'un dossier avec financement Pôle Emploi ',
-      required: false,
+    billNumber: Property.ShortText({
+      displayName: 'Numéro de facture',
+      description: 'Remplire un numéro de facture',
+      required: true,
     }),
-    weeklyDuration: Property.ShortText({
-      displayName: 'Intensité hebdomadaire',
-      description: 'Intensité hebdomadaire de la formation, en heures par semaine.',
+    vatRate: Property.Number({
+      displayName: 'TVA',
+      description: "Permet de forcer un Taux de TVA en %. Par defaut la TVA est calculé à partir des données du dossier",
       required: false,
     }),
   },
   async run(context) {
     const message = {
-      indicativeDuration: context.propsValue.indicativeDuration,
-      weeklyDuration: context.propsValue.weeklyDuration
+      billNumber: context.propsValue.billNumber,
+      vatRate: context.propsValue.vatRate,
     };
 
     return await httpClient.sendRequest({
@@ -41,7 +40,7 @@ export const validateRegistrationFolder = createAction({
         wedofCommon.baseUrl +
         '/registrationFolders/' +
         context.propsValue.externalId +
-        '/validate',
+        '/billing',
       body: message,
       headers: {
         'Content-Type': 'application/json',

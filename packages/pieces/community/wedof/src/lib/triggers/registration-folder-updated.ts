@@ -1,7 +1,6 @@
 import { wedofAuth } from '../..';
 import {
   createTrigger,
-  Property,
   TriggerStrategy,
 } from '@activepieces/pieces-framework';
 import { httpClient, HttpMethod } from '@activepieces/pieces-common';
@@ -30,7 +29,7 @@ export const registrationFolderUpdated = createTrigger({
     };
 
     const id = await context.store.get('_webhookId');
-    console.log('/////////// id stocker is ////' + id);
+
     if (id === null) {
       const response = await httpClient.sendRequest({
         method: HttpMethod.POST,
@@ -42,17 +41,15 @@ export const registrationFolderUpdated = createTrigger({
         },
       });
 
-      console.log('/////////// created id is ////' + response.body.id);
       await context.store.put('_webhookId', response.body.id);
     } else {
-      console.log('/////////// webhook already created ////');
+      console.log('/////////// webhook already exist ////');
     }
   },
 
   async onDisable(context) {
     const id = await context.store.get('_webhookId');
 
-    console.log('/////////// on supprime id ////' + id);
     await httpClient.sendRequest({
       method: HttpMethod.DELETE,
       url: wedofCommon.baseUrl + '/webhooks/' + id,
