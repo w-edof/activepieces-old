@@ -12,45 +12,51 @@ export const searchRegistrationFolder = createAction({
     displayName: 'Rechercher un ou plusieurs dossiers de formation',
     description: "Liste les dossiers de formation en fonction des critères sélectionnés",
     props: {
-        limit: Property.ShortText({
-            displayName: "Nombre de dossiers de formation maximum retournés",
-            description: "Nombre de dossiers de formation sont retournés par requête",
-            defaultValue: "100",
+        query: Property.ShortText({
+            displayName: 'Recherche',
+            description: 'Nom, prénom, N° de dossier, N° de certification etc..',
             required: false,
         }),
-        page: Property.ShortText({
-            displayName: "N° de page de la requête",
-            description: "Par défaut : 1",
-            defaultValue: "1",
-            required: false,
-        }),
-        controlState: wedofCommon.controlState,
-        state: wedofCommon.state,
-        certificationFolderState: wedofCommon.certificationFolderState,
-        billingState: wedofCommon.billingState,
         type: wedofCommon.type,
+        state: wedofCommon.state,
         period: wedofCommon.period,
-        since: Property.ShortText({
+        since: Property.DateTime({
             displayName: 'Entre le',
             description: 'Date au format YYYY-MM-DD',
             required: false,
         }),
-        until: Property.ShortText({
-            displayName: "Jusqu'au",
+        until: Property.DateTime({
+            displayName: "et jusqu'au",
             description: 'Date au format YYYY-MM-DD',
-            required: false,
+            required: false
         }),
         filterOnStateDate: wedofCommon.filterOnStateDate,
+        billingState: wedofCommon.billingState,
+        controlState: wedofCommon.controlState,
+        certificationFolderState: wedofCommon.certificationFolderState,
         proposalCode: Property.ShortText({
             displayName: "Code de proposition commercial",
             description: 'Code de la proposition commercial Wedof associé',
             required: false,
         }),
+        limit: Property.Number({
+            displayName: "Nombre de dossiers de formation",
+            description: "Nombre de dossiers de formation maximum qui seront retournés par requête",
+            defaultValue: 100,
+            required: false,
+        }),
+        page: Property.Number({
+            displayName: "N° de page de la requête",
+            description: "Par défaut : 1",
+            defaultValue: 1,
+            required: false,
+        })
 
     },
 
     async run(context) {
         const params = {
+            query: context.propsValue.query ?? null,
             limit: context.propsValue.limit ?? null,
             page: context.propsValue.page ?? null,
             controlState: context.propsValue.controlState ?? null,

@@ -6,6 +6,84 @@ export const wedofCommon = {
 
     state: Property.StaticMultiSelectDropdown({
         displayName: 'Etat du dossier de formation',
+        required: false,
+        options: {
+            options: [
+                {
+                    value: 'registrationFolder.notProcessed',
+                    label: 'Non traité'
+                },
+                {
+                    value: 'registrationFolder.validated',
+                    label: 'Validé'
+                },
+                {
+                    value: 'registrationFolder.waitingAcceptation',
+                    label: "Validé (En cours d'instruction par France Travail)",
+                },
+                {
+                    value: 'registrationFolder.accepted',
+                    label: 'Accepté'
+                },
+                {
+                    value: 'registrationFolder.inTraining',
+                    label: 'En formation'
+                },
+                {
+                    value: 'registrationFolder.terminated',
+                    label: 'Sortie de formation',
+                },
+                {
+                    value: 'registrationFolder.serviceDoneDeclared',
+                    label: 'Service fait déclaré',
+                },
+                {
+                    value: 'registrationFolder.serviceDoneValidated',
+                    label: 'Service fait validé',
+                },
+                {
+                    value: 'registrationFolder.canceledByAttendee',
+                    label: 'Annulé (par le titulaire)',
+                },
+                {
+                    value: 'registrationFolder.canceledByAttendeeNotRealized',
+                    label: 'Annulation titulaire (non réalisé)',
+                },
+                {
+                    value: 'registrationFolder.canceledByOrganism',
+                    label: "Annulé (par l'organisme)",
+                },
+                {
+                    value: 'registrationFolder.canceledByFinancer',
+                    label: 'Annulé (par le financeur)',
+                },
+                {
+                    value: 'registrationFolder.rejectedWithoutTitulaireSuite',
+                    label: 'Annulé sans suite',
+                },
+                {
+                    value: 'registrationFolder.refusedByAttendee',
+                    label: 'Refus titulaire',
+                },
+                {
+                    value: 'registrationFolder.refusedByOrganism',
+                    label: "Refusé (par l'organisme)",
+                },
+                {
+                    value: 'registrationFolder.refusedByFinancer',
+                    label: 'Refusé (par le financeur)',
+                },
+                {
+                    value: 'registrationFolder.refusedByFinancer',
+                    label: 'Refusé (par le financeur)',
+                }
+            ],
+            disabled: false,
+        },
+    }),
+
+    events: Property.StaticMultiSelectDropdown({
+        displayName: 'Etat du dossier de formation',
         required: true,
         options: {
             options: [

@@ -12,7 +12,7 @@ export const registrationFolderSelected = createTrigger({
     displayName: "Événement sur le dossier de formation",
     description: 'Se déclenche Lorsque l\'événement choisi se produit sur un dossier de formation',
     props: {
-        scope: wedofCommon.state,
+        scope: wedofCommon.events,
     },
     sampleData: {},
     type: TriggerStrategy.WEBHOOK,

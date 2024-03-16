@@ -22,14 +22,14 @@ export const updateRegistrationFolder = createAction({
             description: "Nouveau tarif en €",
             required: false,
         }),
-        sessionStartDate: Property.ShortText({
+        sessionStartDate: Property.DateTime({
             displayName: "Date de debut de la session de formation",
             description: "Au format YYYY-MM-DD",
             required: false,
         }),
-        sessionEndDate: Property.ShortText({
+        sessionEndDate: Property.DateTime({
             displayName: "Date de fin de la session de formation",
-            description: "Au format YYYY-MM-DD",
+            description: "Utiliser le format YYYY-MM-DD",
             required: false,
         }),
         notes: Property.LongText({
