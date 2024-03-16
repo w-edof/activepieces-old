@@ -10,71 +10,71 @@ export const wedofCommon = {
         options: {
             options: [
                 {
-                    value: 'registrationFolder.notProcessed',
+                    value: 'notProcessed',
                     label: 'Non traité'
                 },
                 {
-                    value: 'registrationFolder.validated',
+                    value: 'validated',
                     label: 'Validé'
                 },
                 {
-                    value: 'registrationFolder.waitingAcceptation',
+                    value: 'waitingAcceptation',
                     label: "Validé (En cours d'instruction par France Travail)",
                 },
                 {
-                    value: 'registrationFolder.accepted',
+                    value: 'accepted',
                     label: 'Accepté'
                 },
                 {
-                    value: 'registrationFolder.inTraining',
+                    value: 'inTraining',
                     label: 'En formation'
                 },
                 {
-                    value: 'registrationFolder.terminated',
+                    value: 'terminated',
                     label: 'Sortie de formation',
                 },
                 {
-                    value: 'registrationFolder.serviceDoneDeclared',
+                    value: 'serviceDoneDeclared',
                     label: 'Service fait déclaré',
                 },
                 {
-                    value: 'registrationFolder.serviceDoneValidated',
+                    value: 'serviceDoneValidated',
                     label: 'Service fait validé',
                 },
                 {
-                    value: 'registrationFolder.canceledByAttendee',
+                    value: 'canceledByAttendee',
                     label: 'Annulé (par le titulaire)',
                 },
                 {
-                    value: 'registrationFolder.canceledByAttendeeNotRealized',
+                    value: 'canceledByAttendeeNotRealized',
                     label: 'Annulation titulaire (non réalisé)',
                 },
                 {
-                    value: 'registrationFolder.canceledByOrganism',
+                    value: 'canceledByOrganism',
                     label: "Annulé (par l'organisme)",
                 },
                 {
-                    value: 'registrationFolder.canceledByFinancer',
+                    value: 'canceledByFinancer',
                     label: 'Annulé (par le financeur)',
                 },
                 {
-                    value: 'registrationFolder.rejectedWithoutTitulaireSuite',
+                    value: 'rejectedWithoutTitulaireSuite',
                     label: 'Annulé sans suite',
                 },
                 {
-                    value: 'registrationFolder.refusedByAttendee',
+                    value: 'refusedByAttendee',
                     label: 'Refus titulaire',
                 },
                 {
-                    value: 'registrationFolder.refusedByOrganism',
+                    value: 'refusedByOrganism',
                     label: "Refusé (par l'organisme)",
                 },
                 {
-                    value: 'registrationFolder.refusedByFinancer',
+                    value: 'refusedByFinancer',
                     label: 'Refusé (par le financeur)',
                 },
                 {
-                    value: 'registrationFolder.refusedByFinancer',
+                    value: 'refusedByFinancer',
                     label: 'Refusé (par le financeur)',
                 }
             ],
