@@ -83,20 +83,38 @@ export const wedofCommon = {
     }),
 
     events: Property.StaticMultiSelectDropdown({
-        displayName: 'Etat du dossier de formation',
+        displayName: 'Événement sur le dossier de formation',
         required: true,
         options: {
             options: [
-                {value: 'registrationFolder.created', label: 'Créé'},
-                {value: 'registrationFolder.updated', label: 'Mis à jour'},
-                {value: 'registrationFolder.notProcessed', label: 'Non traité'},
-                {value: 'registrationFolder.validated', label: 'Validé'},
+                {
+                    value: 'registrationFolder.created',
+                    label: 'Créé'
+                },
+                {
+                    value: 'registrationFolder.updated',
+                    label: 'Mis à jour'
+                },
+                {
+                    value: 'registrationFolder.notProcessed',
+                    label: 'Non traité'
+                },
+                {
+                    value: 'registrationFolder.validated',
+                    label: 'Validé'
+                },
                 {
                     value: 'registrationFolder.waitingAcceptation',
                     label: "Validé (En cours d'instruction par France Travail)",
                 },
-                {value: 'registrationFolder.accepted', label: 'Accepté'},
-                {value: 'registrationFolder.inTraining', label: 'En formation'},
+                {
+                    value: 'registrationFolder.accepted',
+                    label: 'Accepté'
+                },
+                {
+                    value: 'registrationFolder.inTraining',
+                    label: 'En formation'
+                },
                 {
                     value: 'registrationFolder.terminated',
                     label: 'Sortie de formation',
@@ -109,14 +127,26 @@ export const wedofCommon = {
                     value: 'registrationFolder.serviceDoneValidated',
                     label: 'Service fait validé',
                 },
-                {value: 'registrationFolderFile.added', label: 'Document ajouté'},
+                {
+                    value: 'registrationFolderFile.added',
+                    label: 'Document ajouté'
+                },
                 {
                     value: 'registrationFolderFile.updated',
                     label: 'Document mis a jour',
                 },
-                {value: 'registrationFolderFile.deleted', label: 'Document supprimé'},
-                {value: 'registrationFolderFile.valid', label: 'Document validé'},
-                {value: 'registrationFolderFile.refused', label: 'Document refusé'},
+                {
+                    value: 'registrationFolderFile.deleted',
+                    label: 'Document supprimé'
+                },
+                {
+                    value: 'registrationFolderFile.valid',
+                    label: 'Document validé'
+                },
+                {
+                    value: 'registrationFolderFile.refused',
+                    label: 'Document refusé'
+                },
                 {
                     value: 'registrationFolderFile.toReview',
                     label: 'Document à vérifier',
@@ -169,9 +199,18 @@ export const wedofCommon = {
                     value: 'registrationFolderBilling.depositPaid',
                     label: 'Acompte déposé',
                 },
-                {value: 'registrationFolderBilling.toBill', label: 'A facturer'},
-                {value: 'registrationFolderBilling.billed', label: 'Facturé'},
-                {value: 'registrationFolderBilling.paid', label: 'Payé'},
+                {
+                    value: 'registrationFolderBilling.toBill',
+                    label: 'A facturer'
+                },
+                {
+                    value: 'registrationFolderBilling.billed',
+                    label: 'Facturé'
+                },
+                {
+                    value: 'registrationFolderBilling.paid',
+                    label: 'Payé'
+                },
             ],
             disabled: false,
         },
@@ -184,8 +223,14 @@ export const wedofCommon = {
         defaultValue: false,
         options: {
             options: [
-                {value: true, label: 'Oui'},
-                {value: false, label: 'Non'},
+                {
+                    value: true,
+                    label: 'Oui'
+                },
+                {
+                    value: false,
+                    label: 'Non'
+                },
             ],
             disabled: false,
         },
@@ -198,9 +243,18 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {value: 'notInControl', label: 'Aucun contrôle'},
-                {value: 'inControl', label: 'En cours de contrôle'},
-                {value: 'released', label: 'Contrôle terminé'},
+                {
+                    value: 'notInControl',
+                    label: 'Aucun contrôle'
+                },
+                {
+                    value: 'inControl',
+                    label: 'En cours de contrôle'
+                },
+                {
+                    value: 'released',
+                    label: 'Contrôle terminé'
+                },
             ],
             disabled: false,
         },
@@ -211,16 +265,46 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {label: 'Tous', value: 'all'},
-                {label: 'À enregistrer', value: 'toRegister'},
-                {label: 'Enregistré', value: 'registered'},
-                {label: 'Prêt à passer', value: 'toTake'},
-                {label: 'À contrôler', value: 'toControl'},
-                {label: 'Réussi', value: 'success'},
-                {label: 'À repasser', value: 'toRetake'},
-                {label: 'Échoué', value: 'failed'},
-                {label: 'Refusé', value: 'refused'},
-                {label: 'Abandonné', value: 'aborted'},
+                {
+                    label: 'Tous',
+                    value: 'all'
+                },
+                {
+                    label: 'À enregistrer',
+                    value: 'toRegister'
+                },
+                {
+                    label: 'Enregistré',
+                    value: 'registered'
+                },
+                {
+                    label: 'Prêt à passer',
+                    value: 'toTake'
+                },
+                {
+                    label: 'À contrôler',
+                    value: 'toControl'
+                },
+                {
+                    label: 'Réussi',
+                    value: 'success'
+                },
+                {
+                    label: 'À repasser',
+                    value: 'toRetake'
+                },
+                {
+                    label: 'Échoué',
+                    value: 'failed'
+                },
+                {
+                    label: 'Refusé',
+                    value: 'refused'
+                },
+                {
+                    label: 'Abandonné',
+                    value: 'aborted'
+                },
             ],
             disabled: false,
         },
@@ -231,13 +315,34 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {label: "Tous", value: "all"},
-                {label: "Pas facturable", value: "notBillable"},
-                {label: "En attente du virement", value: "depositWait"},
-                {label: "Virement effectué", value: "depositPaid"},
-                {label: "A facturer", value: "toBill"},
-                {label: "Facturé", value: "billed"},
-                {label: "Payé", value: "paid"}
+                {
+                    label: "Tous",
+                    value: "all"
+                },
+                {
+                    label: "Pas facturable",
+                    value: "notBillable"
+                },
+                {
+                    label: "En attente du virement",
+                    value: "depositWait"
+                },
+                {
+                    label: "Virement effectué",
+                    value: "depositPaid"
+                },
+                {
+                    label: "A facturer",
+                    value: "toBill"
+                },
+                {
+                    label: "Facturé",
+                    value: "billed"
+                },
+                {
+                    label: "Payé",
+                    value: "paid"
+                }
             ],
             disabled: false,
         },
@@ -248,70 +353,202 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {label: "Tous", value: "all"},
-                {label: "CPF", value: "cpf"},
-                {label: "Kairos (AIF)", value: "kairosAif"},
-                {label: "OPCO", value: "opco"},
-                {label: "Entreprise", value: "company"},
-                {label: "Autofinancement", value: "individual"},
-                {label: "Pôle Emploi (Autres)", value: "poleEmploi"}
+                {
+                    label: "Tous",
+                    value: "all"
+                },
+                {
+                    label: "CPF",
+                    value: "cpf"
+                },
+                {
+                    label: "Kairos (AIF)",
+                    value: "kairosAif"
+                },
+                {
+                    label: "OPCO",
+                    value: "opco"
+                },
+                {
+                    label: "Entreprise",
+                    value: "company"
+                },
+                {
+                    label: "Autofinancement",
+                    value: "individual"
+                },
+                {
+                    label: "Pôle Emploi (Autres)",
+                    value: "poleEmploi"
+                }
             ],
             disabled: false,
         },
     }),
 
-    period: Property.StaticMultiSelectDropdown({
+    period: Property.StaticDropdown({
         displayName: 'Période',
         required: false,
         options: {
             options: [
-                {label: "Personnalisée", value: "custom",},
-                {label: "Demain", value: "tomorrow"},
-                {label: "Aujourd'hui", value: "today"},
-                {label: "Hier", value: "yesterday"},
-                {label: "7 derniers jours", value: "rollingWeek"},
-                {label: "7 prochains jours", value: "rollingWeekFuture"},
-                {label: "Semaine prochaine", value: "nextWeek"},
-                {label: "Semaine précédente", value: "previousWeek"},
-                {label: "Semaine courante", value: "currentWeek"},
-                {label: "30 derniers jours", value: "rollingMonth"},
-                {label: "30 prochains jours", value: "rollingMonthFuture"},
-                {label: "Mois prochain", value: "nextMonth"},
-                {label: "Mois précédent", value: "previousMonth"},
-                {label: "Mois courant", value: "currentMonth"},
-                {label: "12 derniers mois", value: "rollingYear"},
-                {label: "12 prochains mois", value: "rollingYearFuture"},
-                {label: "Année prochaine", value: "nextYear"},
-                {label: "Année précédente", value: "previousYear"},
-                {label: "Année courante", value: "currentYear"}
+                {
+                    label: "Personnalisée",
+                    value: "custom"
+                },
+                {
+                    label: "Demain",
+                    value: "tomorrow"
+                },
+                {
+                    label: "Aujourd'hui",
+                    value: "today"
+                },
+                {
+                    label: "Hier",
+                    value: "yesterday"
+                },
+                {
+                    label: "7 derniers jours",
+                    value: "rollingWeek"
+                },
+                {
+                    label: "7 prochains jours",
+                    value: "rollingWeekFuture"
+                },
+                {
+                    label: "Semaine prochaine",
+                    value: "nextWeek"
+                },
+                {
+                    label: "Semaine précédente",
+                    value: "previousWeek"
+                },
+                {
+                    label: "Semaine courante",
+                    value: "currentWeek"
+                },
+                {
+                    label: "30 derniers jours",
+                    value: "rollingMonth"
+                },
+                {
+                    label: "30 prochains jours",
+                    value: "rollingMonthFuture"
+                },
+                {
+                    label: "Mois prochain",
+                    value: "nextMonth"
+                },
+                {
+                    label: "Mois précédent",
+                    value: "previousMonth"
+                },
+                {
+                    label: "Mois courant",
+                    value: "currentMonth"
+                },
+                {
+                    label: "12 derniers mois",
+                    value: "rollingYear"
+                },
+                {
+                    label: "12 prochains mois",
+                    value: "rollingYearFuture"
+                },
+                {
+                    label: "Année prochaine",
+                    value: "nextYear"
+                },
+                {
+                    label: "Année précédente",
+                    value: "previousYear"
+                },
+                {
+                    label: "Année courante",
+                    value: "currentYear"
+                }
             ],
             disabled: false,
         },
     }),
 
-    filterOnStateDate: Property.StaticMultiSelectDropdown({
+    filterOnStateDate: Property.StaticDropdown({
         displayName: 'Basé sur la date de',
         required: false,
         options: {
             options: [
-                {label: "Dernier mis à jour", value: "lastUpdate"},
-                {label: "Date de Création", value: "createdOn"},
-                {label: "Passage à Non Traité", value: "notProcessedDate"},
-                {label: "Passage à Validé", value: "validatedDate"},
-                {label: "Passage à Accepter", value: "acceptedDate"},
-                {label: "Passage à Entrer en formation", value: "inTrainingDate"},
-                {label: "Passage à Sortie de formation", value: "terminatedDate"},
-                {label: "Passage à Service fait Déclaré", value: "serviceDoneDeclaredDate"},
-                {label: "Passage à Service fait Validé", value: "serviceDoneValidatedDate"},
-                {label: "Passage à Facturer", value: "billedDate"},
-                {label: "Passage à Refus titulaire", value: "refusedByAttendeeDate"},
-                {label: "Passage à Refusé (par l'organisme)", value: "refusedByOrganismDate"},
-                {label: "Passage à Annulé (parle titulaire)", value: "canceledByAttendeeDate"},
-                {label: "Passage à Annulé (par l'organisme)", value: "canceledByOrganismDate"},
-                {label: "Passage à Annulation titulaire (non réalisé)", value: "canceledByAttendeeNotRealizedDate"},
-                {label: "Passage à Annulé sans suite", value: "rejectedWithoutTitulaireSuiteDate"},
-                {label: "Date de début de session", value: "sessionStartDate"},
-                {label: "Date de fin de session", value: "sessionEndDate"}
+                {
+                    label: "Dernier mis à jour",
+                    value: "lastUpdate"
+                },
+                {
+                    label: "Date de Création",
+                    value: "createdOn"
+                },
+                {
+                    label: "Passage à Non Traité",
+                    value: "notProcessedDate"
+                },
+                {
+                    label: "Passage à Validé",
+                    value: "validatedDate"
+                },
+                {
+                    label: "Passage à Accepter",
+                    value: "acceptedDate"
+                },
+                {
+                    label: "Passage à Entrer en formation",
+                    value: "inTrainingDate"
+                },
+                {
+                    label: "Passage à Sortie de formation",
+                    value: "terminatedDate"
+                },
+                {
+                    label: "Passage à Service fait Déclaré",
+                    value: "serviceDoneDeclaredDate"
+                },
+                {
+                    label: "Passage à Service fait Validé",
+                    value: "serviceDoneValidatedDate"
+                },
+                {
+                    label: "Passage à Facturer",
+                    value: "billedDate"
+                },
+                {
+                    label: "Passage à Refus titulaire",
+                    value: "refusedByAttendeeDate"
+                },
+                {
+                    label: "Passage à Refusé (par l'organisme)",
+                    value: "refusedByOrganismDate"
+                },
+                {
+                    label: "Passage à Annulé (parle titulaire)",
+                    value: "canceledByAttendeeDate"
+                },
+                {
+                    label: "Passage à Annulé (par l'organisme)",
+                    value: "canceledByOrganismDate"
+                },
+                {
+                    label: "Passage à Annulation titulaire (non réalisé)",
+                    value: "canceledByAttendeeNotRealizedDate"
+                },
+                {
+                    label: "Passage à Annulé sans suite",
+                    value: "rejectedWithoutTitulaireSuiteDate"
+                },
+                {
+                    label: "Date de début de session",
+                    value: "sessionStartDate"
+                },
+                {
+                    label: "Date de fin de session",
+                    value: "sessionEndDate"
+                }
             ],
             disabled: false,
         },
