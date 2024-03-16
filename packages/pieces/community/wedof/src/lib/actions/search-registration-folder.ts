@@ -71,7 +71,7 @@ export const searchRegistrationFolder = createAction({
                 queryParams[value] = params[key] as string;
             }
         })
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.GET,
             queryParams: queryParams,
             url:
@@ -81,6 +81,6 @@ export const searchRegistrationFolder = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

@@ -34,7 +34,7 @@ export const billRegistrationFolder = createAction({
             vatRate: context.propsValue.vatRate,
         };
 
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.POST,
             url:
                 wedofCommon.baseUrl +
@@ -46,6 +46,6 @@ export const billRegistrationFolder = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

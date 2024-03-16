@@ -10,7 +10,7 @@ export const getTerminatedRegistrationFoldesReasons = createAction({
     description: 'liste les codes possibles de sortie d\'un dossier de formation',
     props: {},
     async run(context) {
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.GET,
             url:
                 wedofCommon.baseUrl +
@@ -19,6 +19,6 @@ export const getTerminatedRegistrationFoldesReasons = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

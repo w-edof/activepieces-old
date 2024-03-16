@@ -29,7 +29,7 @@ export const declareRegistrationFolderIntraining = createAction({
             date: context.propsValue.date,
         };
 
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.POST,
             url:
                 wedofCommon.baseUrl +
@@ -41,6 +41,6 @@ export const declareRegistrationFolderIntraining = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

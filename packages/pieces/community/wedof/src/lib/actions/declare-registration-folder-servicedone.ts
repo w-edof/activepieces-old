@@ -43,7 +43,7 @@ export const declareRegistrationFolderServicedone = createAction({
             code: context.propsValue.code,
         };
 
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.POST,
             url:
                 wedofCommon.baseUrl +
@@ -55,6 +55,6 @@ export const declareRegistrationFolderServicedone = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

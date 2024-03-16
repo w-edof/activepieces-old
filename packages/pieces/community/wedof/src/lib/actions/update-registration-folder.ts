@@ -63,7 +63,7 @@ export const updateRegistrationFolder = createAction({
             }
 
         };
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.PUT,
             body: message,
             url:
@@ -73,6 +73,6 @@ export const updateRegistrationFolder = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

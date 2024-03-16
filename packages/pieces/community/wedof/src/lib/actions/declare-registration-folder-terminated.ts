@@ -40,7 +40,7 @@ export const declareRegistrationFolderTerminated = createAction({
             absenceDuration: context.propsValue.absenceDuration,
         };
 
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.POST,
             url:
                 wedofCommon.baseUrl +
@@ -52,6 +52,6 @@ export const declareRegistrationFolderTerminated = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

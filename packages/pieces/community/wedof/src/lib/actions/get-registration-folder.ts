@@ -20,7 +20,7 @@ export const getRegistrationFolder = createAction({
     },
 
     async run(context) {
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.GET,
             url:
                 wedofCommon.baseUrl +
@@ -29,6 +29,6 @@ export const getRegistrationFolder = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });

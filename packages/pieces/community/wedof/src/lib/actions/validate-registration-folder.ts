@@ -35,7 +35,7 @@ export const validateRegistrationFolder = createAction({
             weeklyDuration: context.propsValue.weeklyDuration
         };
 
-        return await httpClient.sendRequest({
+        return (await httpClient.sendRequest({
             method: HttpMethod.POST,
             url:
                 wedofCommon.baseUrl +
@@ -47,6 +47,6 @@ export const validateRegistrationFolder = createAction({
                 'Content-Type': 'application/json',
                 'X-Api-Key': context.auth as string,
             },
-        });
+        })).body;
     },
 });
