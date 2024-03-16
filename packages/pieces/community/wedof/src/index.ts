@@ -8,7 +8,7 @@ import {
     HttpMethod,
 } from '@activepieces/pieces-common';
 import {wedofCommon} from './lib/common/wedof';
-import {newRegistrationFolderCreated} from './lib/triggers/new-registration-folder-created';
+import {newRegistrationFolderNotProcessed} from './lib/triggers/new-registration-folder-created';
 import {registrationFolderUpdated} from './lib/triggers/registration-folder-updated';
 import {registrationFolderAccepted} from './lib/triggers/registration-folder-accepted';
 import {registrationFolderPaid} from './lib/triggers/registration-folder-paid';
@@ -24,6 +24,8 @@ import {declareRegistrationFolderIntraining} from './lib/actions/declare-registr
 import {billRegistrationFolder} from './lib/actions/bill-registration-folder';
 import {getTerminatedRegistrationFoldesReasons} from './lib/actions/get-terminated-registration-folders-reasons';
 import {getCanceledRegistrationFoldesReasons} from './lib/actions/get-canceled-registration-foldes-reasons';
+import {registrationFolderInTraining} from "./lib/triggers/registration-folder-inTraining";
+import {registrationFolderTerminated} from "./lib/triggers/registration-folder-terminated";
 
 export const wedofAuth = PieceAuth.SecretText({
     displayName: 'API Key',
@@ -77,9 +79,11 @@ export const wedof = createPiece({
         getCanceledRegistrationFoldesReasons,
     ],
     triggers: [
-        newRegistrationFolderCreated,
+        newRegistrationFolderNotProcessed,
         registrationFolderUpdated,
         registrationFolderAccepted,
+        registrationFolderInTraining,
+        registrationFolderTerminated,
         registrationFolderPaid,
         registrationFolderSelected,
         registrationFolderTobill],

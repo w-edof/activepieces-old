@@ -6,22 +6,22 @@ import {
 import {httpClient, HttpMethod} from '@activepieces/pieces-common';
 import {wedofCommon} from '../common/wedof';
 
-export const registrationFolderUpdated = createTrigger({
+export const registrationFolderInTraining = createTrigger({
     auth: wedofAuth,
-    name: 'registrationFolderUpdated',
-    displayName: 'Dossier de formation mis à jour',
-    description: 'Se déclenche Lorsqu\'un dossier de formation est mis à jour',
+    name: 'registrationFolderInTraining',
+    displayName: 'Dossier de formation entre en formation',
+    description: 'Se déclenche Lorsqu\'un dossier de formation passe à l\'état en formation',
     props: {},
     sampleData: {},
     type: TriggerStrategy.WEBHOOK,
     async onEnable(context) {
         const name =
-            'Activepieces - RegistrationFolderUpdated - ' +
+            'Activepieces - RegistrationFolderInTraining - ' +
             context.webhookUrl.substring(context.webhookUrl.lastIndexOf('/') + 1);
 
         const message = {
             url: context.webhookUrl,
-            events: ['registrationFolder.updated'],
+            events: ['registrationFolder.inTraining'],
             name: name,
             secret: null,
             enabled: true,
@@ -40,6 +40,7 @@ export const registrationFolderUpdated = createTrigger({
                     'X-Api-Key': context.auth as string,
                 },
             });
+
 
             await context.store.put('_webhookId', response.body.id);
         } else {

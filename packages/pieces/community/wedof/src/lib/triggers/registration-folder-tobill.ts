@@ -10,8 +10,8 @@ import {wedofCommon} from '../common/wedof';
 export const registrationFolderTobill = createTrigger({
     auth: wedofAuth,
     name: 'registrationFolderTobill',
-    displayName: 'Dossier à facturer',
-    description: 'triggers when a registration folder becomes to bill',
+    displayName: 'Dossier de formation à facturer',
+    description: 'Se déclenche Lorsqu\'un dossier de formation est prêt à être facturé (service fait validé)',
     props: {},
     sampleData: {},
     type: TriggerStrategy.WEBHOOK,

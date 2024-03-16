@@ -9,8 +9,8 @@ import {wedofCommon} from '../common/wedof';
 export const registrationFolderAccepted = createTrigger({
     auth: wedofAuth,
     name: 'registrationFolderAccepted',
-    displayName: 'Dossier accepté',
-    description: 'triggers when registration folder is accepted',
+    displayName: 'Dossier de formation accepté',
+    description: 'Se déclenche Lorsqu\'un dossier de formation passe à l\'état accepté',
     props: {},
     sampleData: {},
     type: TriggerStrategy.WEBHOOK,

@@ -9,8 +9,8 @@ import {wedofCommon} from '../common/wedof';
 export const registrationFolderSelected = createTrigger({
     auth: wedofAuth,
     name: 'registrationFolderSelected',
-    displayName: "Dossier à l'état choisi",
-    description: 'triggers when a registration folder is selected',
+    displayName: "Événement sur le dossier de formation",
+    description: 'Se déclenche Lorsque l\'événement choisi se produit sur un dossier de formation',
     props: {
         scope: wedofCommon.state,
     },
@@ -18,7 +18,7 @@ export const registrationFolderSelected = createTrigger({
     type: TriggerStrategy.WEBHOOK,
     async onEnable(context) {
         const name =
-            'Activepieces - RegistrationFolderSelected - ' +
+            'Activepieces - EventSelectedRegistrationFolder - ' +
             context.webhookUrl.substring(context.webhookUrl.lastIndexOf('/') + 1);
 
         const message = {

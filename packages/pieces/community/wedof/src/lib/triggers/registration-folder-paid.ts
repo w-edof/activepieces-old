@@ -9,8 +9,8 @@ import {wedofCommon} from '../common/wedof';
 export const registrationFolderPaid = createTrigger({
     auth: wedofAuth,
     name: 'registrationFolderPaid',
-    displayName: 'Dossier payé (partiel ou total)',
-    description: 'triggers when a registration folder is paid',
+    displayName: 'Dossier de formation payé (acompte ou payé totalement)',
+    description: 'Se déclenche Lorsqu\'un dossier de formation est payé',
     props: {},
     sampleData: {},
     type: TriggerStrategy.WEBHOOK,

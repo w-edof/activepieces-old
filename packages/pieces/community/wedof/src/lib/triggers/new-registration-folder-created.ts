@@ -3,11 +3,11 @@ import {createTrigger, TriggerStrategy} from '@activepieces/pieces-framework';
 import {httpClient, HttpMethod} from '@activepieces/pieces-common';
 import {wedofCommon} from '../common/wedof';
 
-export const newRegistrationFolderCreated = createTrigger({
+export const newRegistrationFolderNotProcessed = createTrigger({
     auth: wedofAuth,
-    name: 'newRegistrationFolderCreated',
-    displayName: 'Nouveau dossier',
-    description: 'triggers when a new registration folder is created',
+    name: 'newRegistrationFolderNotProcessed',
+    displayName: 'Nouveau dossier de formation',
+    description: 'Se déclenche Lorsqu\'un nouveau dossier de formation est créé (non traité)',
     type: TriggerStrategy.WEBHOOK,
     props: {},
     sampleData: {},
@@ -15,12 +15,12 @@ export const newRegistrationFolderCreated = createTrigger({
     async onEnable(context) {
         const url = context.webhookUrl as string;
         const name =
-            'Activepieces - newRegistrationFolderCreated - ' +
+            'Activepieces - newRegistrationFolderNotProcessed - ' +
             url.substring(url.lastIndexOf('/') + 1);
 
         const message = {
             url: context.webhookUrl,
-            events: ['registrationFolder.created'],
+            events: ['registrationFolder.notProcessed'],
             name: name,
             secret: null,
             enabled: true,
