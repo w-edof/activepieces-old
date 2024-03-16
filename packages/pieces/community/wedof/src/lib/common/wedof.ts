@@ -5,17 +5,17 @@ export const wedofCommon = {
     host: 'https://www.wedof.fr/api',
 
     state: Property.StaticMultiSelectDropdown({
-        displayName: 'Etat du dossier de formations',
+        displayName: 'Etat du dossier de formation',
         required: true,
         options: {
             options: [
-                {value: 'registrationFolder.created', label: 'Créer'},
+                {value: 'registrationFolder.created', label: 'Créé'},
                 {value: 'registrationFolder.updated', label: 'Mis à jour'},
                 {value: 'registrationFolder.notProcessed', label: 'Non traité'},
                 {value: 'registrationFolder.validated', label: 'Validé'},
                 {
                     value: 'registrationFolder.waitingAcceptation',
-                    label: "Validé (En cours d'instruction Pole emploi)",
+                    label: "Validé (En cours d'instruction par France Travail)",
                 },
                 {value: 'registrationFolder.accepted', label: 'Accepté'},
                 {value: 'registrationFolder.inTraining', label: 'En formation'},
@@ -120,9 +120,9 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {value: 'notInControl', label: 'Aucun controle'},
-                {value: 'inControl', label: 'En cours de controle'},
-                {value: 'released', label: 'Controle terminé'},
+                {value: 'notInControl', label: 'Aucun contrôle'},
+                {value: 'inControl', label: 'En cours de contrôle'},
+                {value: 'released', label: 'Contrôle terminé'},
             ],
             disabled: false,
         },
@@ -137,10 +137,10 @@ export const wedofCommon = {
                 {label: 'À enregistrer', value: 'toRegister'},
                 {label: 'Enregistré', value: 'registered'},
                 {label: 'Prêt à passer', value: 'toTake'},
-                {label: 'À controler', value: 'toControl'},
+                {label: 'À contrôler', value: 'toControl'},
                 {label: 'Réussi', value: 'success'},
                 {label: 'À repasser', value: 'toRetake'},
-                {label: 'Echoué', value: 'failed'},
+                {label: 'Échoué', value: 'failed'},
                 {label: 'Refusé', value: 'refused'},
                 {label: 'Abandonné', value: 'aborted'},
             ],
@@ -149,7 +149,7 @@ export const wedofCommon = {
     }),
 
     billingState: Property.StaticMultiSelectDropdown({
-        displayName: 'Etat de facturation',
+        displayName: 'État de facturation',
         required: false,
         options: {
             options: [
@@ -187,7 +187,7 @@ export const wedofCommon = {
         required: false,
         options: {
             options: [
-                {label: "Personalisée", value: "custom",},
+                {label: "Personnalisée", value: "custom",},
                 {label: "Demain", value: "tomorrow"},
                 {label: "Aujourd'hui", value: "today"},
                 {label: "Hier", value: "yesterday"},
@@ -230,7 +230,7 @@ export const wedofCommon = {
                 {label: "Passage à Refusé (par l'organisme)", value: "refusedByOrganismDate"},
                 {label: "Passage à Annulé (parle titulaire)", value: "canceledByAttendeeDate"},
                 {label: "Passage à Annulé (par l'organisme)", value: "canceledByOrganismDate"},
-                {label: "Passage à Anulation titulaire (non réalisé)", value: "canceledByAttendeeNotRealizedDate"},
+                {label: "Passage à Annulation titulaire (non réalisé)", value: "canceledByAttendeeNotRealizedDate"},
                 {label: "Passage à Annulé sans suite", value: "rejectedWithoutTitulaireSuiteDate"},
                 {label: "Date de début de session", value: "sessionStartDate"},
                 {label: "Date de fin de session", value: "sessionEndDate"}
