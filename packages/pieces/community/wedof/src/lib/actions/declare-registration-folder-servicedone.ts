@@ -6,14 +6,12 @@ import {wedofCommon} from '../common/wedof';
 export const declareRegistrationFolderServicedone = createAction({
     auth: wedofAuth,
     name: 'declareRegistrationFolderServicedone',
-    displayName: 'Déclarer le service fait du participant',
-    description:
-        "Change l'etat d'un dossier de formation en service fait declaré",
+    displayName: 'Passer un dossier de formation à l\'état : Service fait déclaré',
+    description: 'Change l\'état d\'un dossier de formation vers : Service fait déclaré',
     props: {
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description:
-                'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         absenceDuration: Property.Number({
@@ -31,7 +29,7 @@ export const declareRegistrationFolderServicedone = createAction({
         }),
         code: Property.ShortText({
             displayName: 'Code de sortie de formation',
-            description: 'Selectionner la propieté {code} du bloc Raisons de sortie de formation',
+            description: 'Sélectionner la proprieté {code} du bloc Raisons de sortie de formation',
             required: false,
         }),
 

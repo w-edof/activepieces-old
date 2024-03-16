@@ -9,22 +9,22 @@ import {wedofCommon} from '../common/wedof';
 export const billRegistrationFolder = createAction({
     auth: wedofAuth,
     name: 'billRegistrationFolder',
-    displayName: 'Facturer le dossier de l\'apprenant',
-    description: 'Genere la facturation d\'un dossier de formation',
+    displayName: 'Facturer le dossier de formation',
+    description: 'Associe le dossier de formation a un n° de facture et transmet les informations de facturation au financeur (EDOF par exemple)',
     props: {
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description: 'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         billNumber: Property.ShortText({
-            displayName: 'Numéro de facture',
-            description: 'Remplire un numéro de facture',
+            displayName: 'N° de facture',
+            description: 'N° de la facture à associer',
             required: true,
         }),
         vatRate: Property.Number({
             displayName: 'TVA',
-            description: "Permet de forcer un Taux de TVA en %. Par defaut la TVA est calculé à partir des données du dossier",
+            description: "Permet de forcer un Taux de TVA en %. Par défaut la TVA est calculé à partir des données du dossier de formation",
             required: false,
         }),
     },

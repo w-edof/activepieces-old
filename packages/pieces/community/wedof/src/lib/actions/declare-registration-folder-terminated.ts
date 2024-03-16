@@ -9,13 +9,12 @@ import {wedofCommon} from '../common/wedof';
 export const declareRegistrationFolderTerminated = createAction({
     auth: wedofAuth,
     name: 'declareRegistrationFolderTerminated',
-    displayName: 'Déclarer la sortie de formation du participant',
-    description: 'Change l\'etat d\'un dossier de formation en sortie de formation',
+    displayName: 'Passer un dossier de formation à l\'état : sortie de formation',
+    description: 'Change l\'état d\'un dossier de formation vers : sortie de formation',
     props: {
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description:
-                'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         date: Property.ShortText({
@@ -25,13 +24,12 @@ export const declareRegistrationFolderTerminated = createAction({
         }),
         code: Property.ShortText({
             displayName: 'Code de sortie de formation',
-            description: 'Selectionner la propieté {code} du bloc Raisons de sortie de formation',
+            description: 'Sélectionner la proprieté {code} du bloc Raisons de sortie de formation',
             required: false,
         }),
         absenceDuration: Property.Number({
             displayName: "durée d'absence",
-            description:
-                "La durée d'une éventuelle absence en heures. 0 si aucune absence.",
+            description: "La durée d'une éventuelle absence en heures. 0 si aucune absence.",
             required: false,
         }),
     },

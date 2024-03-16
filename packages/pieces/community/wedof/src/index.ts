@@ -17,7 +17,6 @@ import {registrationFolderTobill} from './lib/triggers/registration-folder-tobil
 import {validateRegistrationFolder} from './lib/actions/validate-registration-folder';
 import {updateRegistrationFolder} from './lib/actions/update-registration-folder';
 import {searchRegistrationFolder} from './lib/actions/search-registration-folder';
-import {listRegistrationFolders} from './lib/actions/list-registration-folders';
 import {declareRegistrationFolderTerminated} from './lib/actions/declare-registration-folder-terminated';
 import {declareRegistrationFolderServicedone} from './lib/actions/declare-registration-folder-servicedone';
 import {declareRegistrationFolderIntraining} from './lib/actions/declare-registration-folder-intraining';
@@ -26,6 +25,7 @@ import {getTerminatedRegistrationFoldesReasons} from './lib/actions/get-terminat
 import {getCanceledRegistrationFoldesReasons} from './lib/actions/get-canceled-registration-foldes-reasons';
 import {registrationFolderInTraining} from "./lib/triggers/registration-folder-inTraining";
 import {registrationFolderTerminated} from "./lib/triggers/registration-folder-terminated";
+import {getRegistrationFolder} from "./lib/actions/get-registration-folder";
 
 export const wedofAuth = PieceAuth.SecretText({
     displayName: 'API Key',
@@ -70,7 +70,7 @@ export const wedof = createPiece({
         validateRegistrationFolder,
         updateRegistrationFolder,
         searchRegistrationFolder,
-        listRegistrationFolders,
+        getRegistrationFolder,
         declareRegistrationFolderTerminated,
         declareRegistrationFolderServicedone,
         declareRegistrationFolderIntraining,

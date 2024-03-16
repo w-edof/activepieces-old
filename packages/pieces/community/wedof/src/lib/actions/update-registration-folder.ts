@@ -9,12 +9,12 @@ import {wedofCommon} from '../common/wedof';
 export const updateRegistrationFolder = createAction({
     auth: wedofAuth,
     name: 'updateRegistrationFolder',
-    displayName: 'Mettre a jour un dossier de formation',
-    description: 'Met a jour les informations d\'un dossier de formation',
+    displayName: 'Mettre à jour un dossier de formation',
+    description: 'Met à jour certaines informations modifiable d\'un dossier de formation',
     props: {
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description: 'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         price: Property.Number({
@@ -23,28 +23,28 @@ export const updateRegistrationFolder = createAction({
             required: false,
         }),
         sessionStartDate: Property.ShortText({
-            displayName: "Date de debut de la session",
+            displayName: "Date de debut de la session de formation",
             description: "Au format YYYY-MM-DD",
             required: false,
         }),
         sessionEndDate: Property.ShortText({
-            displayName: "Date de fin de la session",
+            displayName: "Date de fin de la session de formation",
             description: "Au format YYYY-MM-DD",
             required: false,
         }),
         notes: Property.LongText({
             displayName: 'Notes',
-            description: "notes privées",
+            description: "notes privées (non visible par l'apprenant)",
             required: false,
         }),
         indicativeDuration: Property.Number({
-            displayName: "durée moyenne de la formation (en heures)",
-            description: "durée moyenne de la formation (en heures)",
+            displayName: "Durée moyenne de la formation",
+            description: "En heures, durée moyenne de la formation",
             required: false,
         }),
         weeklyDuration: Property.Number({
-            displayName: "temps de formation par semaine (en heures)",
-            description: "Ne peut pas être supérieur à 99",
+            displayName: "Temps de formation par semaine",
+            description: "En heures, ne peut pas être supérieur à 99",
             required: false,
         }),
 

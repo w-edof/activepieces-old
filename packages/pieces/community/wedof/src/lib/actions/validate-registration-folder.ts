@@ -9,18 +9,18 @@ import {wedofCommon} from '../common/wedof';
 export const validateRegistrationFolder = createAction({
     auth: wedofAuth,
     name: 'validateRegistrationFolder',
-    displayName: "Valider le dossier de l'apprenant ",
-    description: 'Change l\'etat du dossier de formation a l\'etat validé',
+    displayName: "Valider le dossier de formation",
+    description: 'Passer l\'état du dossier de formation à l\'état validé',
     props: {
 
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description: 'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         indicativeDuration: Property.ShortText({
             displayName: 'Durée totale de la formation',
-            description: 'Obligatoire dans le cas d\'un dossier avec financement Pôle Emploi ',
+            description: 'Obligatoire dans le cas d\'un dossier de formation avec financement France Travail',
             required: false,
         }),
         weeklyDuration: Property.ShortText({

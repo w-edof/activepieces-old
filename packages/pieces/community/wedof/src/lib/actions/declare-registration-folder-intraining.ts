@@ -9,12 +9,13 @@ import {wedofCommon} from '../common/wedof';
 export const declareRegistrationFolderIntraining = createAction({
     auth: wedofAuth,
     name: 'declareRegistrationFolderIntraining',
-    displayName: 'Déclarer l\'entrée en formation du participant',
-    description: 'Passe le dossier dans l\'état en formation',
+    displayName: 'Passer un dossier de formation à l\'état : En formation',
+    description: 'Change l\'état d\'un dossier de formation vers : En formation',
+
     props: {
         externalId: Property.ShortText({
-            displayName: 'Id externe',
-            description: 'Selectionner la propieté {externalId} du dossier de formation',
+            displayName: 'N° du dossier de formation',
+            description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
         date: Property.ShortText({

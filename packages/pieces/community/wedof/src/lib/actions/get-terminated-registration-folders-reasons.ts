@@ -6,8 +6,8 @@ import {wedofCommon} from '../common/wedof';
 export const getTerminatedRegistrationFoldesReasons = createAction({
     auth: wedofAuth,
     name: 'getTerminatedRegistrationFoldesReasons',
-    displayName: 'Raisons de sortie de formation',
-    description: 'list les codes de sortie d\'un dossier de formation possibles',
+    displayName: 'Raisons possible pour la sortie de formation',
+    description: 'liste les codes possibles de sortie d\'un dossier de formation',
     props: {},
     async run(context) {
         return await httpClient.sendRequest({

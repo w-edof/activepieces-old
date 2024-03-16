@@ -1,4 +1,4 @@
-import {HttpMethod, httpClient} from '@activepieces/pieces-common';
+import {HttpMethod, httpClient, QueryParams} from '@activepieces/pieces-common';
 import {wedofAuth} from '../..';
 import {
     createAction,
@@ -9,17 +9,19 @@ import {wedofCommon} from '../common/wedof';
 export const searchRegistrationFolder = createAction({
     auth: wedofAuth,
     name: 'listRegistrationFolders',
-    displayName: 'Lister des dossiers de formation',
-    description: "Liste tous les dossiers pour l'organisme de l'utilisateur courant",
+    displayName: 'Rechercher un ou plusieurs dossiers de formation',
+    description: "Liste les dossiers de formation en fonction des critères sélectionnés",
     props: {
         limit: Property.ShortText({
-            displayName: "Nombre d'éléments retourné par requête",
-            description: "par défaut 100",
+            displayName: "Nombre de dossiers de formation maximum retournés",
+            description: "Nombre de dossiers de formation sont retournés par requête",
+            defaultValue: "100",
             required: false,
         }),
         page: Property.ShortText({
-            displayName: "Numéro de page de la requête",
-            description: "par défaut la première",
+            displayName: "N° de page de la requête",
+            description: "Par défaut : 1",
+            defaultValue: "1",
             required: false,
         }),
         controlState: wedofCommon.controlState,
@@ -29,7 +31,7 @@ export const searchRegistrationFolder = createAction({
         type: wedofCommon.type,
         period: wedofCommon.period,
         since: Property.ShortText({
-            displayName: 'Depuis le',
+            displayName: 'Entre le',
             description: 'Date au format YYYY-MM-DD',
             required: false,
         }),
@@ -40,31 +42,38 @@ export const searchRegistrationFolder = createAction({
         }),
         filterOnStateDate: wedofCommon.filterOnStateDate,
         proposalCode: Property.ShortText({
-            displayName: "Code de proposition",
-            description: '',
+            displayName: "Code de proposition commercial",
+            description: 'Code de la proposition commercial Wedof associé',
             required: false,
         }),
 
     },
 
     async run(context) {
-        const message = {
-            limit: context.propsValue.limit,
-            page: context.propsValue.page,
-            controlState: context.propsValue.controlState,
-            state: context.propsValue.state,
-            certificationFolderState: context.propsValue.certificationFolderState,
-            billingState: context.propsValue.billingState,
-            type: context.propsValue.type,
-            period: context.propsValue.period,
-            since: context.propsValue.since,
-            until: context.propsValue.until,
-            filterOnStateDate: context.propsValue.filterOnStateDate,
-            proposalCode: context.propsValue.proposalCode,
+        const params = {
+            limit: context.propsValue.limit ?? null,
+            page: context.propsValue.page ?? null,
+            controlState: context.propsValue.controlState ?? null,
+            state: context.propsValue.state ?? null,
+            certificationFolderState: context.propsValue.certificationFolderState ?? null,
+            billingState: context.propsValue.billingState ?? null,
+            type: context.propsValue.type ?? null,
+            period: context.propsValue.period ?? null,
+            since: context.propsValue.since ?? null,
+            until: context.propsValue.until ?? null,
+            filterOnStateDate: context.propsValue.filterOnStateDate ?? null,
+            proposalCode: context.propsValue.proposalCode ?? null,
         };
+        let queryParams: QueryParams = {};
+        Object.keys(params).forEach(value => {
+            const key = value as keyof typeof params;
+            if (params[key] != null && params[key] != undefined) {
+                queryParams[value] = params[key] as string;
+            }
+        })
         return await httpClient.sendRequest({
             method: HttpMethod.GET,
-            body: message,
+            queryParams: queryParams,
             url:
                 wedofCommon.baseUrl +
                 '/registrationFolders',
