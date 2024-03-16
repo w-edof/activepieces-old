@@ -29,7 +29,7 @@ export const wedofAuth = PieceAuth.SecretText({
     displayName: 'API Key',
     required: true,
     description: 'Please enter your API Key gived by wedof',
-    validate: async ({auth any}) => {
+    validate: async ({auth}) => {
         const response = await httpClient.sendRequest({
             method: HttpMethod.GET,
             url: wedofCommon.baseUrl + '/users/me',
@@ -57,7 +57,7 @@ export const wedof = createPiece({
     auth: wedofAuth,
     description: 'Automatisez la gestion de vos dossiers de formations (CPF, EDOF, Kairos, AIF, OPCO et autres)',
     minimumSupportedRelease: '0.20.0',
-    logoUrl: 'https://www.wedof.fr/api/doc/logo.png',
+    logoUrl: 'https://www.wedof.fr/assets/images/logo/logo.svg',
     categories: [
         PieceCategory.SALES_AND_CRM,
         PieceCategory.CONTENT_AND_FILES,
