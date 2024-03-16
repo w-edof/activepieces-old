@@ -516,7 +516,7 @@
       "@activepieces/piece-webflow": [
         "packages/pieces/community/webflow/src/index.ts"
       ],
-      "@activepieces/piece-wedof": [
+      "@wedof/piece-wedof": [
         "packages/pieces/community/wedof/src/index.ts"
       ],
       "@activepieces/piece-whatsable": [
