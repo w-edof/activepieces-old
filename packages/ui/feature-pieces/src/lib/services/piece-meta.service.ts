@@ -100,12 +100,6 @@ export class PieceMetadataService {
 
   public triggerItemsDetails: FlowItemDetails[] = [
     {
-      type: TriggerType.WEBHOOK,
-      name: 'Webhook',
-      description: 'Trigger flow by calling a unique web url',
-      logoUrl: '/assets/img/custom/piece/webhook.svg',
-    },
-    {
       type: TriggerType.EMPTY,
       name: 'Trigger',
       description: 'Choose a trigger',
@@ -140,16 +134,17 @@ export class PieceMetadataService {
     edition,
   }: {
     pieceName: string;
-    pieceVersion: string;
+    pieceVersion?: string;
     edition: ApEdition;
   }): Observable<PieceMetadataModel> {
+      const params= {
+      ...spreadIfDefined('version',pieceVersion),
+      edition,
+    };
     return this.http.get<PieceMetadataModel>(
       `${environment.apiUrl}/pieces/${encodeURIComponent(pieceName)}`,
       {
-        params: {
-          version: pieceVersion,
-          edition,
-        },
+        params
       }
     );
   }
@@ -217,9 +212,10 @@ export class PieceMetadataService {
 
   getPieceMetadata(
     pieceName: string,
-    pieceVersion: string
+    pieceVersion?: string
   ): Observable<PieceMetadataModel> {
-    const cacheKey = this.getCacheKey(pieceName, pieceVersion);
+    
+    const cacheKey = this.getCacheKey(pieceName, pieceVersion || 'latest');
 
     if (this.piecesCache.has(cacheKey)) {
       return this.piecesCache.get(cacheKey)!;
@@ -270,11 +266,6 @@ export class PieceMetadataService {
         return {
           url: 'assets/img/custom/piece/loop_mention.png',
           key: 'loop',
-        };
-      case TriggerType.WEBHOOK:
-        return {
-          url: 'assets/img/custom/piece/webhook_mention.png',
-          key: 'webhook',
         };
     }
 

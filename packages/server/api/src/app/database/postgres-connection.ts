@@ -110,7 +110,15 @@ import { MakePlatformNotNullable1705969874745 } from './migration/postgres/17059
 import { AddPlatformToPostgres1709052740378 } from './migration/postgres/1709052740378-AddPlatformToPostgres'
 import { AddSlugToGitRepo1709151540095 } from './migration/postgres/1709151540095-add-slug-to-git-repo'
 import { DropUnusedPlatformIndex1709500873378 } from './migration/postgres/1709500873378-DropUnusedPlatformIndex'
-import { SetNotNullOnPlatform1709505632771 } from './migration/1709505632771-SetNotNullOnPlatform'
+import { SetNotNullOnPlatform1709505632771 } from './migration/postgres/1709505632771-SetNotNullOnPlatform'
+import { MigrateWebhook1709581196563 } from './migration/common/1709581196563-migrate-webhook'
+import { MigrateWebhookTemplate1709581196564 } from './migration/postgres/1709581196564-migrate-webhook-templates'
+import { AddPlatformForeignKeyToProjectPostgres1709566642531 } from './migration/postgres/1709566642531-add-platform-foreign-key-to-project-postgres'
+import { AddUserEmailToReferral1709500213947 } from './migration/postgres/1709500213947-add-user-email-to-referral'
+import { SetFlowVersionUpdatedByToNullIfUserIsDeletedPostgres1709641016072 } from './migration/postgres/1709641016072-set-flow-version-updated-by-to-null-if-user-is-deleted-postgres'
+import { MoveGeneratedByFromSigningKeyToAuditEventPostgres1709669091258 } from './migration/postgres/1709669091258-move-generated-by-from-signing-key-to-audit-event-postgres'
+import { AddMappingStateToGit1709753080714 } from './migration/postgres/1709753080714-AddMappingStateToGit'
+import { AddAuthorsToPieces1710098373707 } from './migration/postgres/1710098373707-AddAuthorsToPieces'
 
 const getSslConfig = (): boolean | TlsOptions => {
     const useSsl = system.get(SystemProp.POSTGRES_USE_SSL)
@@ -183,6 +191,9 @@ const getMigrations = (): (new () => MigrationInterface)[] => {
         AddTriggerTestStrategy1707087022764,
         AddCategoriesToPieceMetadataPostgres1707231704973,
         AddUniqueStoreConstraint1708521505204,
+        SetFlowVersionUpdatedByToNullIfUserIsDeletedPostgres1709641016072,
+        MigrateWebhook1709581196563,
+        AddAuthorsToPieces1710098373707,
     ]
 
     const edition = getEdition()
@@ -236,6 +247,11 @@ const getMigrations = (): (new () => MigrationInterface)[] => {
                 MakePlatformNotNullable1705969874745,
                 AddSlugToGitRepo1709151540095,
                 DropUnusedPlatformIndex1709500873378,
+                MigrateWebhookTemplate1709581196564,
+                AddPlatformForeignKeyToProjectPostgres1709566642531,
+                AddUserEmailToReferral1709500213947,
+                MoveGeneratedByFromSigningKeyToAuditEventPostgres1709669091258,
+                AddMappingStateToGit1709753080714,
             )
             break
         case ApEdition.ENTERPRISE:
@@ -282,12 +298,17 @@ const getMigrations = (): (new () => MigrationInterface)[] => {
                 MakePlatformNotNullable1705969874745,
                 AddSlugToGitRepo1709151540095,
                 DropUnusedPlatformIndex1709500873378,
+                MigrateWebhookTemplate1709581196564,
+                AddPlatformForeignKeyToProjectPostgres1709566642531,
+                MoveGeneratedByFromSigningKeyToAuditEventPostgres1709669091258,
+                AddMappingStateToGit1709753080714,
             )
             break
         case ApEdition.COMMUNITY:
             commonMigration.push(
-                AddPlatformToPostgres1709052740378, 
-                SetNotNullOnPlatform1709505632771)
+                AddPlatformToPostgres1709052740378,
+                SetNotNullOnPlatform1709505632771,
+            )
             break
     }
 

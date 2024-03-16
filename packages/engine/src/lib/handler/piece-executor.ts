@@ -1,4 +1,4 @@
-import { AUTHENTICATION_PROPERTY_NAME, GenericStepOutput, ActionType, ExecutionOutputStatus, PieceAction, StepOutputStatus, assertNotNullOrUndefined, isNil, ExecutionType, PauseType } from '@activepieces/shared'
+import { AUTHENTICATION_PROPERTY_NAME, GenericStepOutput, ActionType, PieceAction, StepOutputStatus, assertNotNullOrUndefined, isNil, ExecutionType, PauseType, FlowRunStatus } from '@activepieces/shared'
 import { ActionHandler, BaseExecutor } from './base-executor'
 import { ExecutionVerdict, FlowExecutorContext } from './context/flow-execution-context'
 import { ActionContext, ConnectionsManager, PauseHook, PauseHookParams, PiecePropertyMap, StaticPropsValue, StopHook, StopHookParams, TagsManager } from '@activepieces/pieces-framework'
@@ -7,8 +7,7 @@ import { createFilesService } from '../services/files.service'
 import { createConnectionService } from '../services/connections.service'
 import { EngineConstants } from './context/engine-constants'
 import { pieceLoader } from '../helper/piece-loader'
-import { utils } from '../utils'
-import { continueIfFailureHandler, runWithExponentialBackoff } from '../helper/error-handling'
+import { continueIfFailureHandler, handleExecutionError, runWithExponentialBackoff } from '../helper/error-handling'
 import { URL } from 'url'
 
 type HookResponse = { stopResponse: StopHookParams | undefined, pauseResponse: PauseHookParams | undefined, tags: string[], stopped: boolean, paused: boolean }
@@ -117,7 +116,7 @@ const executeAction: ActionHandler<PieceAction> = async ({ action, executionStat
         if (hookResponse.stopped) {
             assertNotNullOrUndefined(hookResponse.stopResponse, 'stopResponse')
             return newExecutionContext.upsertStep(action.name, stepOutput.setOutput(output)).setVerdict(ExecutionVerdict.SUCCEEDED, {
-                reason: ExecutionOutputStatus.STOPPED,
+                reason: FlowRunStatus.STOPPED,
                 stopResponse: hookResponse.stopResponse.response,
             }).increaseTask()
         }
@@ -125,7 +124,7 @@ const executeAction: ActionHandler<PieceAction> = async ({ action, executionStat
             assertNotNullOrUndefined(hookResponse.pauseResponse, 'pauseResponse')
             return newExecutionContext.upsertStep(action.name, stepOutput.setOutput(output).setStatus(StepOutputStatus.PAUSED))
                 .setVerdict(ExecutionVerdict.PAUSED, {
-                    reason: ExecutionOutputStatus.PAUSED,
+                    reason: FlowRunStatus.PAUSED,
                     pauseMetadata: hookResponse.pauseResponse.pauseMetadata,
                 })
         }
@@ -133,13 +132,15 @@ const executeAction: ActionHandler<PieceAction> = async ({ action, executionStat
         return newExecutionContext.upsertStep(action.name, stepOutput.setOutput(output)).increaseTask().setVerdict(ExecutionVerdict.RUNNING, undefined)
     }
     catch (e) {
-        const errorMessage = await utils.tryParseJson((e as Error).message)
-        console.error(errorMessage)
+        const handledError = handleExecutionError(e)
+
+        const failedStepOutput = stepOutput
+            .setStatus(StepOutputStatus.FAILED)
+            .setErrorMessage(handledError.message)
 
         return executionState
-            .upsertStep(action.name, stepOutput.setStatus(StepOutputStatus.FAILED).setErrorMessage(errorMessage))
-            .setVerdict(ExecutionVerdict.FAILED, undefined)
-
+            .upsertStep(action.name, failedStepOutput)
+            .setVerdict(ExecutionVerdict.FAILED, handledError.verdictResponse)
     }
 }
 

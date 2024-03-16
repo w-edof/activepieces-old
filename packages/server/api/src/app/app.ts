@@ -31,6 +31,7 @@ import {
     CodeSandboxType,
     ErrorCode,
     Flow,
+    FlowRun,
     ProjectWithLimits,
 } from '@activepieces/shared'
 import { appConnectionsHooks } from './app-connection/app-connection-service/app-connection-hooks'
@@ -103,6 +104,7 @@ import { appSumoModule } from './ee/billing/appsumo/appsumo.module'
 import { platformModule } from './platform/platform.module'
 import { gitRepoModule } from './ee/git-repos/git-repo.module'
 import { formModule } from './flows/flow/form/form.module'
+import { adminPlatformPieceModule } from './ee/platform/admin-platform.controller'
 
 export const setupApp = async (): Promise<FastifyInstance> => {
     const app = fastify({
@@ -142,6 +144,7 @@ export const setupApp = async (): Promise<FastifyInstance> => {
                     'project-member': ProjectMember,
                     project: ProjectWithLimits,
                     flow: Flow,
+                    'flow-run': FlowRun,
                     'app-connection': AppConnectionWithoutSensitiveData,
                     piece: PieceMetadata,
                     'git-repo': GitRepoWithoutSensitiveData,
@@ -188,6 +191,7 @@ export const setupApp = async (): Promise<FastifyInstance> => {
         cors: {
             origin: '*',
         },
+        transports: ['websocket'],
     })
 
     app.io.use((socket: Socket, next: (err?: Error) => void) => {
@@ -303,6 +307,7 @@ export const setupApp = async (): Promise<FastifyInstance> => {
             await redisSystemJob.init()
             await app.register(projectBillingModule)
             await app.register(usageTrackerModule)
+            await app.register(adminPlatformPieceModule)
             setPlatformOAuthService({
                 service: platformOAuth2Service,
             })
