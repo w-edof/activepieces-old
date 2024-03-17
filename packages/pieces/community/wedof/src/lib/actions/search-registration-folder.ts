@@ -65,8 +65,8 @@ export const searchRegistrationFolder = createAction({
             billingState: context.propsValue.billingState ?? null,
             type: context.propsValue.type ?? null,
             period: context.propsValue.period ?? null,
-            since: context.propsValue.since ?? null,
-            until: context.propsValue.until ?? null,
+            since: context.propsValue.since ? context.propsValue.since.replace('.000Z', 'Z') : null,
+            until: context.propsValue.until ? context.propsValue.until.replace('.000Z', 'Z') : null,
             filterOnStateDate: context.propsValue.filterOnStateDate ?? null,
             proposalCode: context.propsValue.proposalCode ?? null,
         };

@@ -26,7 +26,7 @@ export const declareRegistrationFolderIntraining = createAction({
     },
     async run(context) {
         const message = {
-            date: context.propsValue.date,
+            date: context.propsValue.date ? context.propsValue.date.split('T')[0] : null,
         };
 
         return (await httpClient.sendRequest({

@@ -344,8 +344,8 @@ export const wedofCommon = {
                     value: "paid"
                 }
             ],
-            disabled: false,
-        },
+            disabled: false
+        }
     }),
 
     type: Property.StaticMultiSelectDropdown({

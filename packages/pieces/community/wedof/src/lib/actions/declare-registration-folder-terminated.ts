@@ -62,7 +62,7 @@ export const declareRegistrationFolderTerminated = createAction({
     },
     async run(context) {
         const message = {
-            date: context.propsValue.date,
+            date: context.propsValue.date ? context.propsValue.date.split('T')[0] : null,
             code: context.propsValue.code,
             absenceDuration: context.propsValue.absenceDuration,
         };

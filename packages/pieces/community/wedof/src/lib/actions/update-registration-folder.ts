@@ -56,8 +56,8 @@ export const updateRegistrationFolder = createAction({
                 price: context.propsValue.price,
             },
             trainingActionInfo: {
-                sessionStartDate: context.propsValue.sessionStartDate,
-                sessionEndDate: context.propsValue.sessionEndDate,
+                sessionStartDate: context.propsValue.sessionStartDate ? context.propsValue.sessionStartDate.split('T')[0] : null,
+                sessionEndDate: context.propsValue.sessionEndDate ? context.propsValue.sessionEndDate.split('T')[0] : null,
                 indicativeDuration: context.propsValue.indicativeDuration,
                 weeklyDuration: context.propsValue.weeklyDuration,
             }
