@@ -6,11 +6,11 @@ import {
 } from '@activepieces/pieces-framework';
 import {wedofCommon} from '../common/wedof';
 
-export const cancelRegistrationFolder = createAction({
+export const refuseRegistrationFolder = createAction({
     auth: wedofAuth,
-    name: 'cancelRegistrationFolder',
-    displayName: 'Annuler le dossier de formation',
-    description: 'Annuler le dossier de formation',
+    name: 'refuseRegistrationFolder',
+    displayName: 'Refuser le dossier de formation',
+    description: 'Refuser le dossier de formation',
     props: {
         externalId: Property.ShortText({
             displayName: 'N° du dossier de formation',
@@ -18,8 +18,8 @@ export const cancelRegistrationFolder = createAction({
             required: true,
         }),
         code: Property.Dropdown({
-            displayName: 'Raison de l\'annulation du dossier de formation',
-            description: 'Sélectionner la raison de l\'annulation',
+            displayName: 'Raison du refus du dossier de formation',
+            description: 'Sélectionner la raison du refus',
             required: true,
             refreshers: ['auth'],
             refreshOnSearch: false,
@@ -34,7 +34,7 @@ export const cancelRegistrationFolder = createAction({
                     method: HttpMethod.GET,
                     url:
                         wedofCommon.baseUrl +
-                        '/registrationFoldersReasons?type=canceled',
+                        '/registrationFoldersReasons?type=refused',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Api-Key': auth as string,
@@ -51,7 +51,7 @@ export const cancelRegistrationFolder = createAction({
         }),
         description: Property.LongText({
             displayName: 'Description',
-            description: ' Texte expliquant les raisons de l\'annulation',
+            description: ' Texte expliquant les raisons du refus',
             required: false,
         })
     },
@@ -67,7 +67,7 @@ export const cancelRegistrationFolder = createAction({
                 wedofCommon.baseUrl +
                 '/registrationFolders/' +
                 context.propsValue.externalId +
-                '/cancel',
+                '/refuse',
             body: message,
             headers: {
                 'Content-Type': 'application/json',

@@ -24,6 +24,9 @@ import {billRegistrationFolder} from './lib/actions/bill-registration-folder';
 import {registrationFolderInTraining} from "./lib/triggers/registration-folder-inTraining";
 import {registrationFolderTerminated} from "./lib/triggers/registration-folder-terminated";
 import {getRegistrationFolder} from "./lib/actions/get-registration-folder";
+import {cancelRegistrationFolder} from "./lib/actions/cancel-registration-folder";
+import {refuseRegistrationFolder} from "./lib/actions/refuse-registration-folder";
+import {getMinimalSessionDates} from "./lib/actions/get-minimal-session-dates";
 
 export const wedofAuth = PieceAuth.SecretText({
     displayName: 'API Key',
@@ -73,6 +76,9 @@ export const wedof = createPiece({
         declareRegistrationFolderServicedone,
         declareRegistrationFolderIntraining,
         billRegistrationFolder,
+        cancelRegistrationFolder,
+        refuseRegistrationFolder,
+        getMinimalSessionDates
     ],
     triggers: [
         newRegistrationFolderNotProcessed,
