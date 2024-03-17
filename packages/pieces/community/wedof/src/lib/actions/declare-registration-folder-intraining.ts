@@ -13,13 +13,13 @@ export const declareRegistrationFolderIntraining = createAction({
     description: 'Change l\'état d\'un dossier de formation vers : En formation',
 
     props: {
-        externalId: Property.ShortText({
+        externalId: Property.DateTime({
             displayName: 'N° du dossier de formation',
             description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
-        date: Property.ShortText({
-            displayName: 'Date',
+        date: Property.DateTime({
+            displayName: 'Entrée en formation le',
             description: 'Date du passage en formation au format YYYY-MM-DD.',
             required: false,
         }),

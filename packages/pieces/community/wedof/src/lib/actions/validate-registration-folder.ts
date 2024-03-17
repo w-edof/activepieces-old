@@ -18,12 +18,12 @@ export const validateRegistrationFolder = createAction({
             description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
-        indicativeDuration: Property.ShortText({
+        indicativeDuration: Property.Number({
             displayName: 'Durée totale de la formation',
             description: 'Obligatoire dans le cas d\'un dossier de formation avec financement France Travail',
             required: false,
         }),
-        weeklyDuration: Property.ShortText({
+        weeklyDuration: Property.Number({
             displayName: 'Intensité hebdomadaire',
             description: 'Intensité hebdomadaire de la formation, en heures par semaine.',
             required: false,

@@ -21,7 +21,7 @@ export const declareRegistrationFolderServicedone = createAction({
             required: false,
         }),
         forceMajeurAbsence: wedofCommon.forceMajeurAbsence,
-        trainingDuration: Property.ShortText({
+        trainingDuration: Property.Number({
             displayName: "Durée totale de la formation",
             description:
                 "précise la durée totale de la formation afin de calculer le % d'absence",

@@ -1,30 +1,25 @@
 import {HttpMethod, httpClient} from '@activepieces/pieces-common';
 import {wedofAuth} from '../..';
 import {
-    createAction, DropdownOption, DropdownState,
+    createAction,
     Property,
 } from '@activepieces/pieces-framework';
 import {wedofCommon} from '../common/wedof';
 
-export const declareRegistrationFolderTerminated = createAction({
+export const billRegistrationFolder = createAction({
     auth: wedofAuth,
-    name: 'declareRegistrationFolderTerminated',
-    displayName: 'Passer un dossier de formation à l\'état : sortie de formation',
-    description: 'Change l\'état d\'un dossier de formation vers : sortie de formation',
+    name: 'billRegistrationFolder',
+    displayName: 'Annuler le dossier de formation',
+    description: 'Annuler le dossier de formation',
     props: {
         externalId: Property.ShortText({
             displayName: 'N° du dossier de formation',
             description: 'Sélectionner la propriété {externalId} du dossier de formation',
             required: true,
         }),
-        date: Property.DateTime({
-            displayName: 'Sortie de formation le',
-            description: 'Date de la sortie de formation au format YYYY-MM-DD.',
-            required: false,
-        }),
         code: Property.Dropdown({
-            displayName: 'Raison de la sortie de formation',
-            description: 'Sélectionner la raison de sortie de formation',
+            displayName: 'Raison de l\'annulation du dossier de formation',
+            description: 'Sélectionner la raison de l\'annulation',
             required: true,
             refreshers: ['auth'],
             refreshOnSearch: false,
@@ -39,7 +34,7 @@ export const declareRegistrationFolderTerminated = createAction({
                     method: HttpMethod.GET,
                     url:
                         wedofCommon.baseUrl +
-                        '/registrationFoldersReasons?type=terminated',
+                        '/registrationFoldersReasons?type=canceled',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Api-Key': auth as string,
@@ -54,17 +49,16 @@ export const declareRegistrationFolderTerminated = createAction({
                 };
             }
         }),
-        absenceDuration: Property.Number({
-            displayName: "durée d'absence",
-            description: "La durée d'une éventuelle absence en heures. 0 si aucune absence.",
+        description: Property.LongText({
+            displayName: 'Description',
+            description: ' Texte expliquant les raisons de l\'annulation',
             required: false,
-        }),
+        })
     },
     async run(context) {
         const message = {
-            date: context.propsValue.date,
             code: context.propsValue.code,
-            absenceDuration: context.propsValue.absenceDuration,
+            description: context.propsValue.description,
         };
 
         return (await httpClient.sendRequest({
@@ -73,7 +67,7 @@ export const declareRegistrationFolderTerminated = createAction({
                 wedofCommon.baseUrl +
                 '/registrationFolders/' +
                 context.propsValue.externalId +
-                '/terminate',
+                '/cancel',
             body: message,
             headers: {
                 'Content-Type': 'application/json',

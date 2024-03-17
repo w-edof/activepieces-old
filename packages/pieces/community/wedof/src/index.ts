@@ -21,8 +21,6 @@ import {declareRegistrationFolderTerminated} from './lib/actions/declare-registr
 import {declareRegistrationFolderServicedone} from './lib/actions/declare-registration-folder-servicedone';
 import {declareRegistrationFolderIntraining} from './lib/actions/declare-registration-folder-intraining';
 import {billRegistrationFolder} from './lib/actions/bill-registration-folder';
-import {getTerminatedRegistrationFoldesReasons} from './lib/actions/get-terminated-registration-folders-reasons';
-import {getCanceledRegistrationFoldesReasons} from './lib/actions/get-canceled-registration-foldes-reasons';
 import {registrationFolderInTraining} from "./lib/triggers/registration-folder-inTraining";
 import {registrationFolderTerminated} from "./lib/triggers/registration-folder-terminated";
 import {getRegistrationFolder} from "./lib/actions/get-registration-folder";
@@ -67,16 +65,14 @@ export const wedof = createPiece({
     ],
     authors: ['vbarrier', 'obenazouz'],
     actions: [
-        validateRegistrationFolder,
-        updateRegistrationFolder,
-        searchRegistrationFolder,
         getRegistrationFolder,
+        searchRegistrationFolder,
+        updateRegistrationFolder,
+        validateRegistrationFolder,
         declareRegistrationFolderTerminated,
         declareRegistrationFolderServicedone,
         declareRegistrationFolderIntraining,
         billRegistrationFolder,
-        getTerminatedRegistrationFoldesReasons,
-        getCanceledRegistrationFoldesReasons,
     ],
     triggers: [
         newRegistrationFolderNotProcessed,
