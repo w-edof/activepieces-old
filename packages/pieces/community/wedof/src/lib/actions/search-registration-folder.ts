@@ -1,10 +1,8 @@
-import {HttpMethod, httpClient, QueryParams} from '@activepieces/pieces-common';
+import {httpClient, HttpMethod, QueryParams} from '@activepieces/pieces-common';
 import {wedofAuth} from '../..';
-import {
-    createAction,
-    Property,
-} from '@activepieces/pieces-framework';
+import {createAction, Property,} from '@activepieces/pieces-framework';
 import {wedofCommon} from '../common/wedof';
+import dayjs from "dayjs";
 
 export const searchRegistrationFolder = createAction({
     auth: wedofAuth,
@@ -17,20 +15,44 @@ export const searchRegistrationFolder = createAction({
             description: 'Nom, prénom, N° de dossier, N° de certification etc..',
             required: false,
         }),
+        period: wedofCommon.period,
+        periodForm: Property.DynamicProperties({
+            description: '',
+            displayName: '',
+            required: true,
+            refreshers: ['period'],
+            props: async (propsValue) => {
+                const {period} = propsValue as unknown as {
+                    period: string;
+                };
+                if (period === 'custom') {
+                    return {
+                        since: Property.DateTime({
+                            displayName: '(Période) Entre le',
+                            description: 'Date au format YYYY-MM-DD',
+                            required: true,
+                        }),
+                        until: Property.DateTime({
+                            displayName: "(Période) et jusqu'au",
+                            description: 'Date au format YYYY-MM-DD',
+                            required: true
+                        }),
+                    };
+                } else if (['next', 'future', 'tomorrow'].some(v => period.toLowerCase().includes(v))) {
+                    return {
+                        filterOnStateDate: wedofCommon.filterOnStateDateFuture
+                    };
+                } else if (period) {
+                    return {
+                        filterOnStateDate: wedofCommon.filterOnStateDate
+                    };
+                } else {
+                    return {} as any;
+                }
+            }
+        }),
         type: wedofCommon.type,
         state: wedofCommon.state,
-        period: wedofCommon.period,
-        since: Property.DateTime({
-            displayName: 'Entre le',
-            description: 'Date au format YYYY-MM-DD',
-            required: false,
-        }),
-        until: Property.DateTime({
-            displayName: "et jusqu'au",
-            description: 'Date au format YYYY-MM-DD',
-            required: false
-        }),
-        filterOnStateDate: wedofCommon.filterOnStateDate,
         billingState: wedofCommon.billingState,
         controlState: wedofCommon.controlState,
         certificationFolderState: wedofCommon.certificationFolderState,
@@ -65,9 +87,9 @@ export const searchRegistrationFolder = createAction({
             billingState: context.propsValue.billingState ?? null,
             type: context.propsValue.type ?? null,
             period: context.propsValue.period ?? null,
-            since: context.propsValue.since ? context.propsValue.since.replace('.000Z', 'Z') : null,
-            until: context.propsValue.until ? context.propsValue.until.replace('.000Z', 'Z') : null,
-            filterOnStateDate: context.propsValue.filterOnStateDate ?? null,
+            since: context.propsValue.periodForm['since'] ? dayjs(context.propsValue.periodForm['since']).format('YYYY-MM-DDTHH:mm:ssZ') : null,
+            until: context.propsValue.periodForm['until'] ? dayjs(context.propsValue.periodForm['until']).format('YYYY-MM-DDTHH:mm:ssZ') : null,
+            filterOnStateDate: context.propsValue.periodForm['filterOnStateDate'] ?? null,
             proposalCode: context.propsValue.proposalCode ?? null,
         };
         let queryParams: QueryParams = {};

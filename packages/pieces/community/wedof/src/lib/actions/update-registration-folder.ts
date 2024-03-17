@@ -5,6 +5,7 @@ import {
     Property,
 } from '@activepieces/pieces-framework';
 import {wedofCommon} from '../common/wedof';
+import dayjs from "dayjs";
 
 export const updateRegistrationFolder = createAction({
     auth: wedofAuth,
@@ -24,12 +25,12 @@ export const updateRegistrationFolder = createAction({
         }),
         sessionStartDate: Property.DateTime({
             displayName: "Date de debut de la session de formation",
-            description: "Au format YYYY-MM-DD",
+            description: "Date au format YYYY-MM-DD",
             required: false,
         }),
         sessionEndDate: Property.DateTime({
             displayName: "Date de fin de la session de formation",
-            description: "Utiliser le format YYYY-MM-DD",
+            description: "Date au format YYYY-MM-DD",
             required: false,
         }),
         notes: Property.LongText({
@@ -56,8 +57,8 @@ export const updateRegistrationFolder = createAction({
                 price: context.propsValue.price,
             },
             trainingActionInfo: {
-                sessionStartDate: context.propsValue.sessionStartDate ? context.propsValue.sessionStartDate.split('T')[0] : null,
-                sessionEndDate: context.propsValue.sessionEndDate ? context.propsValue.sessionEndDate.split('T')[0] : null,
+                sessionStartDate: context.propsValue.sessionStartDate ? dayjs(context.propsValue.sessionStartDate).format('YYYY-MM-DD') : null,
+                sessionEndDate: context.propsValue.sessionEndDate ? dayjs(context.propsValue.sessionEndDate).format('YYYY-MM-DD') : null,
                 indicativeDuration: context.propsValue.indicativeDuration,
                 weeklyDuration: context.propsValue.weeklyDuration,
             }

@@ -5,6 +5,7 @@ import {
     Property,
 } from '@activepieces/pieces-framework';
 import {wedofCommon} from '../common/wedof';
+import dayjs from "dayjs";
 
 export const declareRegistrationFolderIntraining = createAction({
     auth: wedofAuth,
@@ -20,13 +21,13 @@ export const declareRegistrationFolderIntraining = createAction({
         }),
         date: Property.DateTime({
             displayName: 'Entrée en formation le',
-            description: 'Date du passage en formation au format YYYY-MM-DD.',
+            description: 'Date au format YYYY-MM-DD.',
             required: false,
         }),
     },
     async run(context) {
         const message = {
-            date: context.propsValue.date ? context.propsValue.date.split('T')[0] : null,
+            date: context.propsValue.date ? dayjs(context.propsValue.date).format('YYYY-MM-DD') : null,
         };
 
         return (await httpClient.sendRequest({

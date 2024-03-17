@@ -12,7 +12,6 @@ export const validateRegistrationFolder = createAction({
     displayName: "Valider le dossier de formation",
     description: 'Passer l\'état du dossier de formation à l\'état validé',
     props: {
-
         externalId: Property.ShortText({
             displayName: 'N° du dossier de formation',
             description: 'Sélectionner la propriété {externalId} du dossier de formation',

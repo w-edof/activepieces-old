@@ -389,8 +389,13 @@ export const wedofCommon = {
     period: Property.StaticDropdown({
         displayName: 'Période',
         required: false,
+        defaultValue: null,
         options: {
             options: [
+                {
+                    label: "Aucune période",
+                    value: null
+                },
                 {
                     label: "Personnalisée",
                     value: "custom"
@@ -473,12 +478,14 @@ export const wedofCommon = {
     }),
 
     filterOnStateDate: Property.StaticDropdown({
-        displayName: 'Basé sur la date de',
-        required: false,
+        displayName: '(Période) Basé sur la date de',
+        required: true,
+        defaultValue: 'lastUpdate',
         options: {
+            disabled: false,
             options: [
                 {
-                    label: "Dernier mis à jour",
+                    label: "Date de mise à jour",
                     value: "lastUpdate"
                 },
                 {
@@ -549,8 +556,25 @@ export const wedofCommon = {
                     label: "Date de fin de session",
                     value: "sessionEndDate"
                 }
-            ],
+            ]
+        }
+    }),
+    filterOnStateDateFuture: Property.StaticDropdown({
+        displayName: '(Période) Basé sur la date de',
+        required: true,
+        defaultValue: 'sessionStartDate',
+        options: {
             disabled: false,
-        },
+            options: [
+                {
+                    label: "Date de début de session",
+                    value: "sessionStartDate"
+                },
+                {
+                    label: "Date de fin de session",
+                    value: "sessionEndDate"
+                }
+            ]
+        }
     }),
 };
