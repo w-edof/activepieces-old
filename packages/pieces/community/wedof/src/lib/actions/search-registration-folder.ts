@@ -87,8 +87,8 @@ export const searchRegistrationFolder = createAction({
             billingState: context.propsValue.billingState ?? null,
             type: context.propsValue.type ?? null,
             period: context.propsValue.period ?? null,
-            since: context.propsValue.periodForm['since'] ? dayjs(context.propsValue.periodForm['since']).format('YYYY-MM-DDTHH:mm:ssZ') : null,
-            until: context.propsValue.periodForm['until'] ? dayjs(context.propsValue.periodForm['until']).format('YYYY-MM-DDTHH:mm:ssZ') : null,
+            since: context.propsValue.periodForm['since'] ? dayjs(context.propsValue.periodForm['since']).startOf('day').format('YYYY-MM-DDTHH:mm:ssZ') : null,
+            until: context.propsValue.periodForm['until'] ? dayjs(context.propsValue.periodForm['until']).endOf('day').format('YYYY-MM-DDTHH:mm:ssZ') : null,
             filterOnStateDate: context.propsValue.periodForm['filterOnStateDate'] ?? null,
             proposalCode: context.propsValue.proposalCode ?? null,
         };
