@@ -29,30 +29,27 @@ import {refuseRegistrationFolder} from "./lib/actions/refuse-registration-folder
 import {getMinimalSessionDates} from "./lib/actions/get-minimal-session-dates";
 
 export const wedofAuth = PieceAuth.SecretText({
-    displayName: 'API Key',
-    required: true,
-    description: 'Please enter your API Key gived by wedof',
-    validate: async ({auth}) => {
-        const response = await httpClient.sendRequest({
-            method: HttpMethod.GET,
-            url: wedofCommon.baseUrl + '/users/me',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Api-Key': auth,
-            },
-        });
-
-        if (response.status === 200) {
-            return {
-                valid: true,
-            };
-        } else {
-            return {
-                valid: false,
-                error: 'Clé Api invalid'
-            };
-        }
-    },
+  displayName: 'Clé API',
+  required: true,
+  description: 'Veuillez saisir votre clé API fournie par wedof',
+  validate: async ({ auth }) => {
+    try {
+      await httpClient.sendRequest({
+        method: HttpMethod.GET,
+        url: wedofCommon.baseUrl + '/users/me',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Api-Key': auth,
+        },
+      });
+      return { valid: true };
+    } catch (error) {
+      return {
+        valid: false,
+        error: 'Clé Api invalide',
+      };
+    }
+  },
 });
 
 export const wedof = createPiece({
